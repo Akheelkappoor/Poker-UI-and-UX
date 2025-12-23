@@ -1,0 +1,94 @@
+.action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.amount-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.amount-control input[type="range"] {
+  flex: 1;
+  accent-color: var(--gold);
+}
+
+.amount-control input[type="number"] {
+  width: 110px;
+  padding: 8px 10px;
+  background: rgba(247, 241, 230, 0.12);
+  border: 1px solid rgba(225, 192, 108, 0.3);
+  border-radius: 10px;
+  color: var(--cream);
+  font-size: 14px;
+}
+
+.chip-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  border-radius: 999px;
+  padding: 6px 14px;
+  border: 1px solid rgba(225, 192, 108, 0.4);
+  background: rgba(225, 192, 108, 0.2);
+  color: var(--cream);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.chip:hover {
+  transform: translateY(-2px);
+  background: rgba(225, 192, 108, 0.35);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.btn {
+  border: none;
+  border-radius: 16px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, var(--gold), var(--gold-soft));
+  color: var(--ink);
+  box-shadow: 0 12px 22px rgba(225, 192, 108, 0.25);
+}
+
+.btn-secondary {
+  background: rgba(247, 241, 230, 0.1);
+  border: 1px solid rgba(247, 241, 230, 0.25);
+  color: var(--cream);
+}
+
+.btn-danger {
+  background: rgba(181, 69, 69, 0.2);
+  border: 1px solid rgba(181, 69, 69, 0.5);
+  color: #ffd2d2;
+}
+
+.error {
+  color: #ffd2d2;
+  background: rgba(181, 69, 69, 0.22);
+  border: 1px solid rgba(181, 69, 69, 0.45);
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+}

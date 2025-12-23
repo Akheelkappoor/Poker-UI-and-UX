@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap");
+
+:root {
+  color-scheme: light;
+  --gold: #e1c06c;
+  --gold-soft: #f6e7be;
+  --emerald: #0f3f31;
+  --emerald-deep: #071f18;
+  --emerald-mid: #1b5945;
+  --cream: #f8f3e8;
+  --ink: #191510;
+  --rose: #c04a4a;
+  --slate: #5b554f;
+  --shadow: rgba(6, 5, 4, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  background: radial-gradient(circle at 10% 10%, rgba(225, 192, 108, 0.25), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(15, 63, 49, 0.6), transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(7, 31, 24, 0.9), transparent 50%),
+    linear-gradient(160deg, #071b15 0%, #0d3b2c 50%, #091b14 100%);
+  color: var(--cream);
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+button,
+input {
+  font-family: inherit;
+}

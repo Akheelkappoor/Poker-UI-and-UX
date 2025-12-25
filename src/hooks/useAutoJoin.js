@@ -5,15 +5,18 @@ import { buildFeedFromAccounts, mergeFeed } from "../utils/feed";
 
 const useAutoJoin = ({
   accounts,
+  autoJoinAttempted,
   autoJoinLoading,
   gameIds,
   joinRoomUrl,
   getRoomUrl,
   setAccounts,
+  setAutoJoinAttempted,
   setAutoJoinLoading,
   setGameStatus,
   setJoinError,
   setTablePlayers,
+  setWalletReady,
   setFeed,
   setupComplete,
   walletAddress,
@@ -21,10 +24,16 @@ const useAutoJoin = ({
 }) => {
   useEffect(() => {
     const tryAutoJoin = async () => {
-      if (!setupComplete || !walletReady || autoJoinLoading) {
+      if (!gameIds.roomId) {
+        if (autoJoinAttempted) {
+          setAutoJoinAttempted(false);
+        }
         return;
       }
-      if (!gameIds.roomId || accounts.length === 0 || !walletAddress) {
+      if (!setupComplete || !walletReady || autoJoinLoading || autoJoinAttempted) {
+        return;
+      }
+      if (accounts.length === 0 || !walletAddress) {
         return;
       }
       const creator = accounts[0];
@@ -66,8 +75,13 @@ const useAutoJoin = ({
           }
         }
       } catch (err) {
-        setJoinError(err.message || "Unable to join room.");
+        const message = err.message || "Unable to join room.";
+        setJoinError(message);
+        if (message === "Wrong user address") {
+          setWalletReady(false);
+        }
       } finally {
+        setAutoJoinAttempted(true);
         setAutoJoinLoading(false);
       }
     };
@@ -75,15 +89,18 @@ const useAutoJoin = ({
     tryAutoJoin();
   }, [
     accounts,
+    autoJoinAttempted,
     autoJoinLoading,
     gameIds.roomId,
     joinRoomUrl,
     getRoomUrl,
     setAccounts,
+    setAutoJoinAttempted,
     setAutoJoinLoading,
     setGameStatus,
     setJoinError,
     setTablePlayers,
+    setWalletReady,
     setFeed,
     setupComplete,
     walletAddress,

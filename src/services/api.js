@@ -67,3 +67,30 @@ export const raise = async (url, payload) => {
   });
   return { response, data: await safeJson(response) };
 };
+
+export const moveNext = async (url, payload) => {
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  return { response, data: await safeJson(response) };
+};
+
+export const setRound = async (url, payload) => {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  return { response, data: await safeJson(response) };
+};
+
+export const markFailed = async (url, payload) => {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  return { response, data: await safeJson(response) };
+};

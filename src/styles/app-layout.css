@@ -15,23 +15,33 @@
   justify-content: space-between;
   gap: 16px;
   padding: 18px 24px;
-  background: linear-gradient(120deg, rgba(18, 70, 53, 0.92), rgba(8, 33, 24, 0.92));
-  border: 1px solid rgba(225, 192, 108, 0.4);
+  background: radial-gradient(circle at 20% 50%, rgba(0, 96, 57, 0.75), rgba(6, 28, 22, 0.95));
+  border: 1px solid rgba(163, 126, 44, 0.25);
   border-radius: 20px;
   box-shadow: 0 16px 32px var(--shadow);
 }
 
 .brand h1 {
   font-family: "Fraunces", serif;
-  font-size: 28px;
+  font-size: 36px;
   margin: 0;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 .brand p {
-  margin: 4px 0 0;
-  color: rgba(247, 241, 230, 0.75);
-  font-size: 14px;
+  margin: 8px 0 0;
+  color: rgba(247, 241, 230, 0.82);
+  font-size: 15px;
+}
+
+.brand-white {
+  color: #f6f1e8;
+  text-transform: uppercase;
+}
+
+.brand-gold {
+  color: var(--gold);
+  margin-left: 8px;
 }
 
 .status {
@@ -69,8 +79,8 @@
 .status-pill {
   padding: 6px 14px;
   border-radius: 999px;
-  background: rgba(225, 192, 108, 0.16);
-  border: 1px solid rgba(225, 192, 108, 0.4);
+  background: rgba(163, 126, 44, 0.16);
+  border: 1px solid rgba(163, 126, 44, 0.4);
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 1.4px;

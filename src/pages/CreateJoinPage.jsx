@@ -24,12 +24,11 @@ const CreateJoinPage = () => {
       <ToastStack toasts={state.toasts} />
       <div className="top-bar">
         <div className="brand">
-          <h1>Poker Table Setup</h1>
-          <p>Create a room before players join.</p>
-        </div>
-        <div className="status">
-          <span className="status-pill">Setup</span>
-          <span className="label">Local + API</span>
+          <h1>
+            <span className="brand-white">MANO</span>
+            <span className="brand-gold">Money</span>
+          </h1>
+          <p>Join or create poker rooms to play with friends.</p>
         </div>
       </div>
 

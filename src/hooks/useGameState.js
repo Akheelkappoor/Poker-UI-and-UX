@@ -24,8 +24,8 @@ export const useGameState = () => {
   const [betAmount, setBetAmount] = useState(persisted.betAmount ?? 20);
   const [callAmount, setCallAmount] = useState(persisted.callAmount ?? 10);
   const { feed, setFeed, toasts, updateFeed } = useFeedState(persisted.feed);
-  const [phase, setPhase] = useState(persisted.phase || initialPhase);
-  const [readyPlayers, setReadyPlayers] = useState(persisted.readyPlayers || {});
+  const [phase, setPhase] = useState(initialPhase);
+  const [readyPlayers, setReadyPlayers] = useState({});
   const [currentAccountId, setCurrentAccountId] = useState(persistedUserId);
   const [maxPlayerBet, setMaxPlayerBet] = useState(persisted.maxPlayerBet ?? 200);
   const [maxPot, setMaxPot] = useState(persisted.maxPot ?? 1000);
@@ -38,6 +38,7 @@ export const useGameState = () => {
   const [playerNameLocked, setPlayerNameLocked] = useState(persisted.playerNameLocked ?? false);
   const [walletAddress, setWalletAddress] = useState(persisted.walletAddress || "");
   const [walletReady, setWalletReady] = useState(persisted.walletReady ?? false);
+  const [walletPending, setWalletPending] = useState(false);
   const [accounts, setAccounts] = useState(persisted.accounts || []);
   const [minPlayerBet, setMinPlayerBet] = useState(persisted.minPlayerBet ?? 5);
   const [tablePlayers, setTablePlayers] = useState(
@@ -151,6 +152,7 @@ export const useGameState = () => {
     walletAddress,
     walletBalance,
     walletReady,
+    walletPending,
     setAccounts,
     setBetAmount,
     setBetTracker,
@@ -175,6 +177,7 @@ export const useGameState = () => {
     setWalletAddress,
     setWalletBalance,
     setWalletReady,
+    setWalletPending,
     updateFeed,
   };
 };

@@ -15,9 +15,12 @@ import FeedPanel from "../components/table/FeedPanel";
 import PlayersPanel from "../components/table/PlayersPanel";
 import TableFooter from "../components/table/TableFooter";
 import StartGameModal from "../components/table/StartGameModal";
+import RoundModal from "../components/table/RoundModal";
+import ShowdownModal from "../components/table/ShowdownModal";
 
 const TablePage = () => {
-  const { state, ui, handlers, tableActions } = useGame();
+  const { state, ui, handlers, tableActions, roundActions, showdownActions } =
+    useGame();
 
   if (!state.setupComplete || !state.walletReady) {
     return <Navigate to="/" replace />;
@@ -44,16 +47,22 @@ const TablePage = () => {
     currentAccountId: state.currentAccountId,
     displayName: state.displayName,
     phase: state.phase,
-    readyPlayers: state.readyPlayers,
-    setPhase: state.setPhase,
-    setReadyPlayers: state.setReadyPlayers,
-    updateFeed: state.updateFeed,
     walletAddress: state.walletAddress,
   });
 
   return (
     <div className="app">
       <ToastStack toasts={state.toasts} />
+      {ui.roundModal.open ? <RoundModal label={ui.roundModal.label} /> : null}
+      {ui.showdownModal.open ? (
+        <ShowdownModal
+          loading={ui.showdownLoading}
+          onClose={showdownActions.closeShowdown}
+          onLoss={showdownActions.handleShowdownLoss}
+          onWin={showdownActions.handleShowdownWin}
+          step={ui.showdownModal.step}
+        />
+      ) : null}
       {ui.actionModal.open ? (
         <ActionModal
           callAmount={ui.actionModal.callAmount}
@@ -110,7 +119,10 @@ const TablePage = () => {
           isReady={phaseControl.isReady}
           allEqual={phaseControl.allEqual}
           notReadyNames={phaseControl.notReadyNames}
-          onReady={phaseControl.handleReady}
+          nextLoading={ui.nextLoading}
+          isShowdown={state.phase === "Showdown"}
+          onReady={roundActions.handleNextReady}
+          onShowdown={showdownActions.openShowdown}
         />
         <FeedPanel feed={state.feed} />
         <PlayersPanel players={state.players} accounts={state.accounts} />

@@ -96,6 +96,9 @@ const useJoinRoomActions = ({
           if (!retry.response.ok) {
             throw new Error(data?.error || "Unable to rejoin.");
           }
+          if (data?.error) {
+            throw new Error(data.error);
+          }
         } else {
           const response = await joinRoom(joinRoomUrl, {
             ...payload,
@@ -105,11 +108,17 @@ const useJoinRoomActions = ({
           if (!response.response.ok) {
             throw new Error(data?.error || "Failed to join room.");
           }
+          if (data?.error && data?.error !== "Played Already Joined") {
+            throw new Error(data.error);
+          }
           if (data?.error === "Played Already Joined") {
             const retry = await rejoinRoom(alreadyJoinedUrl, payload);
             data = retry.data;
             if (!retry.response.ok) {
               throw new Error(data?.error || "Unable to rejoin.");
+            }
+            if (data?.error) {
+              throw new Error(data.error);
             }
           }
         }
@@ -142,7 +151,18 @@ const useJoinRoomActions = ({
         setSetupMode("");
         navigate("/table", { replace: true });
       } catch (err) {
-        setJoinError(err.message || "Unable to join room.");
+        const message = err.message || "Unable to join room.";
+        setJoinError(message);
+        if (message === "Wrong user address") {
+          setGameIds({ roomId: trimmedRoom });
+          setSetupComplete(true);
+          setWalletReady(false);
+          setCurrentAccountId(selected?.id || "");
+          setPlayerNameLocked(false);
+          setWalletAddress(joinWalletAddress.trim());
+          setSetupMode("");
+          navigate("/room", { replace: true });
+        }
       } finally {
         setJoinLoading(false);
       }

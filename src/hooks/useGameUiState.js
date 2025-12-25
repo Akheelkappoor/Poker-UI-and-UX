@@ -16,10 +16,18 @@ const useGameUiState = () => {
   const [joinLoading, setJoinLoading] = useState(false);
   const [joinError, setJoinError] = useState("");
   const [autoJoinLoading, setAutoJoinLoading] = useState(false);
+  const [autoJoinAttempted, setAutoJoinAttempted] = useState(false);
   const [startGameOpen, setStartGameOpen] = useState(false);
   const [startGameLoading, setStartGameLoading] = useState(false);
   const [leaveLoading, setLeaveLoading] = useState(false);
   const [foldLoading, setFoldLoading] = useState(false);
+  const [nextLoading, setNextLoading] = useState(false);
+  const [roundModal, setRoundModal] = useState({ open: false, label: "" });
+  const [showdownModal, setShowdownModal] = useState({
+    open: false,
+    step: "prompt",
+  });
+  const [showdownLoading, setShowdownLoading] = useState(false);
   const [joinRoomId, setJoinRoomId] = useState("");
   const [joinRoomPlayers, setJoinRoomPlayers] = useState([]);
   const [joinSelectedId, setJoinSelectedId] = useState("");
@@ -29,27 +37,17 @@ const useGameUiState = () => {
 
   const urls = useMemo(
     () => ({
-      createRoomUrl:
-        import.meta.env.VITE_CREATE_ROOM_URL ||
-        "https://manoscan-api.vercel.app/pocker-api/create-room",
-      getRoomUrl:
-        import.meta.env.VITE_GET_ROOM_URL ||
-        "https://mano-pocker-api.vercel.app/api/room",
-      joinRoomUrl:
-        import.meta.env.VITE_JOIN_ROOM_URL ||
-        "https://mano-pocker-api.vercel.app/api/join",
-      alreadyJoinedUrl:
-        import.meta.env.VITE_ALREADY_JOINED_URL ||
-        "https://mano-pocker-api.vercel.app/api/join/joined",
-      startGameUrl:
-        import.meta.env.VITE_START_GAME_URL ||
-        "http://192.168.1.16:4541/api/room/start",
-      leaveRoomUrl:
-        import.meta.env.VITE_LEAVE_ROOM_URL ||
-        "http://192.168.1.16:4541/api/player/drop",
-      raiseUrl:
-        import.meta.env.VITE_RAISE_URL ||
-        "http://192.168.1.16:4541/api/player/raise",
+      createRoomUrl: import.meta.env.VITE_CREATE_ROOM_URL,
+      getRoomUrl: import.meta.env.VITE_GET_ROOM_URL,
+      joinRoomUrl: import.meta.env.VITE_JOIN_ROOM_URL,
+      alreadyJoinedUrl: import.meta.env.VITE_ALREADY_JOINED_URL,
+      startGameUrl: import.meta.env.VITE_START_GAME_URL,
+      leaveRoomUrl: import.meta.env.VITE_LEAVE_ROOM_URL,
+      raiseUrl: import.meta.env.VITE_RAISE_URL,
+      moveUrl: import.meta.env.VITE_MOVE_URL,
+      roundUrl: import.meta.env.VITE_ROUND_URL,
+      failedUrl: import.meta.env.VITE_FAILED_URL,
+      socketUrl: import.meta.env.VITE_WS_URL,
     }),
     []
   );
@@ -57,6 +55,7 @@ const useGameUiState = () => {
   return {
     actionModal,
     autoJoinLoading,
+    autoJoinAttempted,
     joinError,
     joinLoading,
     joinRoomId,
@@ -65,6 +64,10 @@ const useGameUiState = () => {
     joinWalletAddress,
     leaveLoading,
     foldLoading,
+    nextLoading,
+    roundModal,
+    showdownModal,
+    showdownLoading,
     raiseInput,
     roomLookupError,
     roomLookupLoading,
@@ -77,6 +80,7 @@ const useGameUiState = () => {
     urls,
     setActionModal,
     setAutoJoinLoading,
+    setAutoJoinAttempted,
     setJoinError,
     setJoinLoading,
     setJoinRoomId,
@@ -85,6 +89,10 @@ const useGameUiState = () => {
     setJoinWalletAddress,
     setLeaveLoading,
     setFoldLoading,
+    setNextLoading,
+    setRoundModal,
+    setShowdownModal,
+    setShowdownLoading,
     setRaiseInput,
     setRoomLookupError,
     setRoomLookupLoading,

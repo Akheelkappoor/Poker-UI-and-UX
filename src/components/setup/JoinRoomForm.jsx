@@ -23,6 +23,7 @@ const JoinRoomForm = () => {
         {ui.roomLookupLoading ? "Loading room..." : "Load room"}
       </button>
       {ui.roomLookupError ? <div className="error">{ui.roomLookupError}</div> : null}
+      {ui.joinError ? <div className="error">{ui.joinError}</div> : null}
       {ui.joinRoomPlayers.length > 0 ? (
         <div className="join-room">
           <div className="field-group">
@@ -72,7 +73,6 @@ const JoinRoomForm = () => {
           >
             {ui.joinLoading ? "Joining..." : "Join Room"}
           </button>
-          {ui.joinError ? <div className="error">{ui.joinError}</div> : null}
         </div>
       ) : null}
     </>

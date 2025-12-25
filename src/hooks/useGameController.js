@@ -6,6 +6,8 @@ import useGameLifecycle from "./useGameLifecycle";
 import useGameHandlers from "./useGameHandlers";
 import useWagerActions from "./useWagerActions";
 import useTableActions from "./useTableActions";
+import useRoundActions from "./useRoundActions";
+import useShowdownActions from "./useShowdownActions";
 
 const useGameController = () => {
   const navigate = useNavigate();
@@ -45,6 +47,9 @@ const useGameController = () => {
     gameIds: state.gameIds,
     currentAccountId: state.currentAccountId,
     leaveRoomUrl: ui.urls.leaveRoomUrl,
+    moveUrl: ui.urls.moveUrl,
+    roundUrl: ui.urls.roundUrl,
+    getRoomUrl: ui.urls.getRoomUrl,
     maxPlayerBet: state.maxPlayerBet,
     navigate,
     setAccounts: state.setAccounts,
@@ -53,6 +58,7 @@ const useGameController = () => {
     setJoinError: ui.setJoinError,
     setLeaveLoading: ui.setLeaveLoading,
     setFoldLoading: ui.setFoldLoading,
+    setNextLoading: ui.setNextLoading,
     setCurrentAccountId: state.setCurrentAccountId,
     setPlayerNameLocked: state.setPlayerNameLocked,
     setSetupComplete: state.setSetupComplete,
@@ -62,6 +68,36 @@ const useGameController = () => {
     setTablePlayers: state.setTablePlayers,
     setWalletReady: state.setWalletReady,
     startGameUrl: ui.urls.startGameUrl,
+    updateFeed: state.updateFeed,
+    walletAddress: state.walletAddress,
+  });
+
+  const roundActions = useRoundActions({
+    accounts: state.accounts,
+    currentAccountId: state.currentAccountId,
+    displayName: state.displayName,
+    gameIds: state.gameIds,
+    getRoomUrl: ui.urls.getRoomUrl,
+    moveUrl: ui.urls.moveUrl,
+    phase: state.phase,
+    setAccounts: state.setAccounts,
+    setGameStatus: state.setGameStatus,
+    setNextLoading: ui.setNextLoading,
+    setPhase: state.setPhase,
+    setShowdownModal: ui.setShowdownModal,
+    setTablePlayers: state.setTablePlayers,
+    updateFeed: state.updateFeed,
+    walletAddress: state.walletAddress,
+  });
+
+  const showdownActions = useShowdownActions({
+    accounts: state.accounts,
+    currentAccountId: state.currentAccountId,
+    displayName: state.displayName,
+    failedUrl: ui.urls.failedUrl,
+    gameIds: state.gameIds,
+    setShowdownLoading: ui.setShowdownLoading,
+    setShowdownModal: ui.setShowdownModal,
     updateFeed: state.updateFeed,
     walletAddress: state.walletAddress,
   });
@@ -82,6 +118,8 @@ const useGameController = () => {
     selectedJoinPlayer,
     wagerActions,
     tableActions,
+    roundActions,
+    showdownActions,
     handlers,
   };
 };

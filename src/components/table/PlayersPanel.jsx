@@ -25,12 +25,23 @@ const PlayersPanel = ({ players, accounts }) => {
         const account =
           accounts.find((entry) => entry.name === player.name) || null;
         const contribution = getContribution(account);
+        const readiness = account?.openToBet ? "Action" : "Ready";
         return (
           <div className="player-row" key={`${player.name}-${player.status}`}>
-            <span>{player.name}</span>
-            <span className="label">
-              {player.status} · <Amount value={contribution} size="sm" />
-            </span>
+            <div className="player-name">{player.name}</div>
+            <div className="player-meta">
+              <div className="player-meta-left">
+                <span className="label">{player.status}</span>
+                <span className="label">
+                  <Amount value={contribution} size="sm" />
+                </span>
+              </div>
+              <span
+                className={`badge ${account?.openToBet ? "badge-warn" : "badge-ok"}`}
+              >
+                {readiness}
+              </span>
+            </div>
           </div>
         );
       })}

@@ -11,7 +11,7 @@
 
 .modal {
   background: rgba(10, 32, 24, 0.95);
-  border: 1px solid rgba(225, 192, 108, 0.3);
+  border: 1px solid rgba(163, 126, 44, 0.3);
   border-radius: 20px;
   padding: 20px;
   width: min(420px, 92vw);
@@ -56,6 +56,145 @@
   gap: 12px;
 }
 
+.start-row-stack {
+  flex-wrap: wrap;
+}
+
+.start-row-stack .btn {
+  flex: 1 1 180px;
+}
+
+.round-modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(6, 5, 4, 0.55);
+  z-index: 40;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.round-card {
+  padding: 28px 34px;
+  border-radius: 22px;
+  border: 1px solid rgba(163, 126, 44, 0.4);
+  background: rgba(12, 36, 26, 0.95);
+  box-shadow: 0 24px 48px rgba(5, 3, 2, 0.5);
+  text-align: center;
+  animation: roundPop 0.5s ease-out;
+}
+
+.round-card h2 {
+  margin: 6px 0 0;
+  font-size: 32px;
+  font-family: "Fraunces", serif;
+  letter-spacing: 2px;
+}
+
+.showdown-card {
+  width: min(420px, 92vw);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.showdown-card .subtle {
+  margin: 0;
+  color: rgba(247, 241, 230, 0.7);
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+.showdown-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti span {
+  position: absolute;
+  width: 10px;
+  height: 16px;
+  background: linear-gradient(120deg, #f4e3bf, #a37e2c);
+  border-radius: 4px;
+  animation: confettiFall 1.8s ease-out infinite;
+  opacity: 0.9;
+}
+
+.confetti span:nth-child(1) {
+  left: 12%;
+  animation-delay: 0s;
+}
+
+.confetti span:nth-child(2) {
+  left: 24%;
+  animation-delay: 0.2s;
+}
+
+.confetti span:nth-child(3) {
+  left: 38%;
+  animation-delay: 0.1s;
+}
+
+.confetti span:nth-child(4) {
+  left: 52%;
+  animation-delay: 0.25s;
+}
+
+.confetti span:nth-child(5) {
+  left: 66%;
+  animation-delay: 0.15s;
+}
+
+.confetti span:nth-child(6) {
+  left: 78%;
+  animation-delay: 0.3s;
+}
+
+.confetti span:nth-child(7) {
+  left: 86%;
+  animation-delay: 0.1s;
+}
+
+.confetti span:nth-child(8) {
+  left: 94%;
+  animation-delay: 0.22s;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-40px) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(280px) rotate(220deg);
+    opacity: 0;
+  }
+}
+
+@keyframes roundPop {
+  0% {
+    transform: translateY(16px) scale(0.96);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
 .status-chip {
   padding: 6px 12px;
   border-radius: 999px;
@@ -72,7 +211,7 @@
 }
 
 .status-live {
-  background: rgba(225, 192, 108, 0.18);
-  border-color: rgba(225, 192, 108, 0.45);
+  background: rgba(163, 126, 44, 0.18);
+  border-color: rgba(163, 126, 44, 0.45);
   color: #f6e9c7;
 }

@@ -34,6 +34,7 @@ export const normalizeAccounts = (data) => {
       amount: item.walletBalance ?? item.amount ?? "",
       userBalance: item.userBalance ?? "",
       raised: item.raised ?? 0,
+      openToBet: Boolean(item.openToBet),
       raises: Array.isArray(item.raises) ? item.raises : [],
     };
   });

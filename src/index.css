@@ -2,11 +2,11 @@
 
 :root {
   color-scheme: light;
-  --gold: #e1c06c;
-  --gold-soft: #f6e7be;
-  --emerald: #0f3f31;
-  --emerald-deep: #071f18;
-  --emerald-mid: #1b5945;
+  --gold: #a37e2c;
+  --gold-soft: #c99b4a;
+  --emerald: #006039;
+  --emerald-deep: #003523;
+  --emerald-mid: #0a6a47;
   --cream: #f8f3e8;
   --ink: #191510;
   --rose: #c04a4a;
@@ -21,10 +21,10 @@
 body {
   margin: 0;
   font-family: "DM Sans", sans-serif;
-  background: radial-gradient(circle at 10% 10%, rgba(225, 192, 108, 0.25), transparent 45%),
-    radial-gradient(circle at 80% 0%, rgba(15, 63, 49, 0.6), transparent 55%),
-    radial-gradient(circle at 70% 80%, rgba(7, 31, 24, 0.9), transparent 50%),
-    linear-gradient(160deg, #071b15 0%, #0d3b2c 50%, #091b14 100%);
+  background: radial-gradient(circle at 12% 12%, rgba(163, 126, 44, 0.24), transparent 46%),
+    radial-gradient(circle at 82% 8%, rgba(0, 96, 57, 0.65), transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(0, 53, 35, 0.9), transparent 52%),
+    linear-gradient(160deg, #002e1d 0%, #006039 48%, #002a1b 100%);
   color: var(--cream);
   min-height: 100vh;
   display: flex;

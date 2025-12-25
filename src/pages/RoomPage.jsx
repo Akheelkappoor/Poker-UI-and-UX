@@ -1,22 +1,90 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ToastStack from "../components/ToastStack";
 import { useGame } from "../context/GameContext";
 import { STORAGE_KEY } from "../utils/gameStateStorage";
+import { joinRoom, rejoinRoom } from "../services/api";
 
 const RoomPage = () => {
-  const { state } = useGame();
+  const { state, ui } = useGame();
   const navigate = useNavigate();
 
+  const handleRetryJoin = useCallback(async () => {
+    if (!state.gameIds.roomId) {
+      ui.setJoinError("Room id is required.");
+      return;
+    }
+    if (!state.currentAccountId) {
+      ui.setJoinError("Select your name again.");
+      return;
+    }
+    if (!state.walletAddress.trim()) {
+      ui.setJoinError("Wallet address is required.");
+      return;
+    }
+    ui.setJoinError("");
+    ui.setJoinLoading(true);
+    try {
+      const payload = {
+        roomId: state.gameIds.roomId,
+        userId: state.currentAccountId,
+      };
+      const response = await joinRoom(ui.urls.joinRoomUrl, {
+        ...payload,
+        userAddress: state.walletAddress.trim(),
+      });
+      let data = response.data;
+      if (!response.response.ok) {
+        throw new Error(data?.error || "Failed to join room.");
+      }
+      if (data?.error === "Played Already Joined") {
+        const retry = await rejoinRoom(ui.urls.alreadyJoinedUrl, payload);
+        data = retry.data;
+        if (!retry.response.ok) {
+          throw new Error(data?.error || "Unable to rejoin.");
+        }
+      }
+      if (data?.error) {
+        throw new Error(data.error);
+      }
+      if (data?.status) {
+        state.setGameStatus(data.status);
+      }
+      state.setWalletReady(true);
+    } catch (err) {
+      ui.setJoinError(err.message || "Unable to join room.");
+    } finally {
+      ui.setJoinLoading(false);
+    }
+  }, [
+    state.currentAccountId,
+    state.gameIds.roomId,
+    state.setGameStatus,
+    state.setWalletReady,
+    state.walletAddress,
+    ui.setJoinError,
+    ui.setJoinLoading,
+    ui.urls.alreadyJoinedUrl,
+    ui.urls.joinRoomUrl,
+  ]);
+
+  const handleContinue = useCallback(() => {
+    if (ui.joinError) {
+      handleRetryJoin();
+      return;
+    }
+    state.setWalletReady(true);
+  }, [handleRetryJoin, state.setWalletReady, ui.joinError]);
+
   useEffect(() => {
-    if (!state.setupComplete) {
+    if (!state.setupComplete && !ui.joinError) {
       navigate("/", { replace: true });
     } else if (state.walletReady) {
       navigate("/table", { replace: true });
     }
-  }, [state.setupComplete, state.walletReady, navigate]);
+  }, [state.setupComplete, state.walletReady, ui.joinError, navigate]);
 
-  if (!state.setupComplete) {
+  if (!state.setupComplete && !ui.joinError) {
     return null;
   }
 
@@ -25,7 +93,10 @@ const RoomPage = () => {
       <ToastStack toasts={state.toasts} />
       <div className="top-bar">
         <div className="brand">
-          <h1>Room Created</h1>
+          <h1>
+            <span className="brand-white">MANO</span>
+            <span className="brand-gold">Money</span>
+          </h1>
           <p>Share the room id and set your wallet.</p>
         </div>
         <div className="status">
@@ -49,11 +120,12 @@ const RoomPage = () => {
         </div>
         <button
           className="btn btn-primary"
-          onClick={() => state.setWalletReady(true)}
-          disabled={!state.walletAddress.trim()}
+          onClick={handleContinue}
+          disabled={!state.walletAddress.trim() || ui.joinLoading}
         >
-          Continue
+          {ui.joinLoading ? "Retrying..." : ui.joinError ? "Retry" : "Continue"}
         </button>
+        {ui.joinError ? <div className="error">{ui.joinError}</div> : null}
         <button
           className="btn btn-secondary"
           onClick={() => {

@@ -14,10 +14,11 @@ const ActionPanel = ({
   maxBet,
   setBetAmount,
 }) => (
-  <div className="panel">
-    <h2>Action</h2>
-    <div className="action-group">
-      <div className="amount-control">
+  <article className="card">
+    <div className="inner">
+      <h2>Action</h2>
+      <p className="kicker">Set amount, then choose an action.</p>
+      <div className="actionBar">
         <input
           type="range"
           min="1"
@@ -40,9 +41,10 @@ const ActionPanel = ({
               Math.min(Math.max(Number(event.target.value) || 0, 1), maxBet)
             )
           }
+          className="amtBox"
         />
       </div>
-      <div className="chip-row">
+      <div className="chipRow" aria-label="Quick amounts">
         {chips.map((chip) => (
           <button
             key={chip}
@@ -52,34 +54,34 @@ const ActionPanel = ({
               setBetAmount((prev) => Math.min(Math.max(prev + chip, 1), maxBet))
             }
           >
-            <Amount value={chip} />
+            <Amount value={chip} size="sm" />
           </button>
         ))}
       </div>
-      <div className="actions">
+      <div className="btnCol">
         <button
-          className="btn btn-secondary"
+          className="btn"
           onClick={handleCall}
           disabled={!isGameStarted || !hasActiveBet}
         >
           Call
         </button>
         <button
-          className="btn btn-primary"
+          className="btn primary"
           onClick={handleBet}
           disabled={!isGameStarted}
         >
           Bet
         </button>
         <button
-          className="btn btn-primary"
+          className="btn primary"
           onClick={handleRaise}
           disabled={!isGameStarted || !hasActiveBet}
         >
           Raise
         </button>
         <button
-          className="btn btn-danger"
+          className="btn danger"
           onClick={handleFold}
           disabled={!isGameStarted || foldLoading}
         >
@@ -88,7 +90,7 @@ const ActionPanel = ({
       </div>
       {error ? <div className="error">{error}</div> : null}
     </div>
-  </div>
+  </article>
 );
 
 export default ActionPanel;

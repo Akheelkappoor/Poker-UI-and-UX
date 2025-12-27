@@ -76,6 +76,18 @@ const RoomPage = () => {
     state.setWalletReady(true);
   }, [handleRetryJoin, state.setWalletReady, ui.joinError]);
 
+  const handleCopyRoomId = useCallback(async () => {
+    if (!state.gameIds.roomId) {
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(state.gameIds.roomId);
+      state.updateFeed("Room", "Room ID copied.");
+    } catch {
+      state.updateFeed("Room", "Copy failed. Try again.");
+    }
+  }, [state.gameIds.roomId, state.updateFeed]);
+
   useEffect(() => {
     if (!state.setupComplete && !ui.joinError) {
       navigate("/", { replace: true });
@@ -89,7 +101,7 @@ const RoomPage = () => {
   }
 
   return (
-    <div className="app">
+    <div className="app landing-room">
       <ToastStack toasts={state.toasts} />
       <div className="top-bar">
         <div className="brand">
@@ -105,42 +117,107 @@ const RoomPage = () => {
         </div>
       </div>
 
-      <div className="panel join-card">
-        <h2>Room ID</h2>
-        <p className="label">Share this room id with players.</p>
-        <div className="room-id">{state.gameIds.roomId}</div>
-        <div className="field-group">
-          <label className="label">Your wallet address</label>
-          <input
-            type="text"
-            value={state.walletAddress}
-            onChange={(event) => state.setWalletAddress(event.target.value)}
-            placeholder="Ox..."
-          />
-        </div>
-        <button
-          className="btn btn-primary"
-          onClick={handleContinue}
-          disabled={!state.walletAddress.trim() || ui.joinLoading}
-        >
-          {ui.joinLoading ? "Retrying..." : ui.joinError ? "Retry" : "Continue"}
-        </button>
-        {ui.joinError ? <div className="error">{ui.joinError}</div> : null}
-        <button
-          className="btn btn-secondary"
-          onClick={() => {
-            localStorage.removeItem(STORAGE_KEY);
-            state.setSetupComplete(false);
-            state.setWalletReady(false);
-            state.setCurrentAccountId("");
-            state.setAccounts([]);
-            state.setTablePlayers([]);
-            state.setGameIds({ roomId: "" });
-            navigate("/", { replace: true });
-          }}
-        >
-          Back to Home
-        </button>
+      <div className="room-wrap">
+        <section className="room-card">
+          <div className="room-card-inner">
+            <div className="room-layout">
+              <div className="room-panel">
+                <h2 className="room-title">Room ID</h2>
+                <p className="room-sub">
+                  Share this code with players. They’ll use it to join your table.
+                </p>
+                <div className="token-row">
+                  <div className="room-token">{state.gameIds.roomId}</div>
+                  <button className="btn room-btn" type="button" onClick={handleCopyRoomId}>
+                    Copy
+                  </button>
+                </div>
+                <ul className="share-list">
+                  <li className="share-item">
+                    <span className="share-badge" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11Z"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        />
+                        <path
+                          d="M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        />
+                      </svg>
+                    </span>
+                    <div className="share-text">
+                      <strong>Send it once</strong>
+                      <span>Drop the code in your group chat. No need to explain more.</span>
+                    </div>
+                  </li>
+                  <li className="share-item">
+                    <span className="share-badge" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M4 7h16M4 12h16M4 17h10"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </span>
+                    <div className="share-text">
+                      <strong>Keep names consistent</strong>
+                      <span>Players should join with the same names you used to create the room.</span>
+                    </div>
+                  </li>
+                </ul>
+                <p className="room-note">
+                  If someone can’t join, confirm the code matches exactly.
+                </p>
+              </div>
+              <div className="room-panel">
+                <h2 className="room-title">Wallet</h2>
+                <p className="room-sub">Set the wallet address you’ll use for settlements.</p>
+                <div className="field-group">
+                  <label className="label">Your wallet address</label>
+                  <input
+                    type="text"
+                    value={state.walletAddress}
+                    onChange={(event) => state.setWalletAddress(event.target.value)}
+                    placeholder="0x..."
+                  />
+                </div>
+                <div className="room-actions">
+                  <button
+                    className="btn btn-primary"
+                    onClick={handleContinue}
+                    disabled={!state.walletAddress.trim() || ui.joinLoading}
+                  >
+                    {ui.joinLoading ? "Retrying..." : ui.joinError ? "Retry" : "Continue"}
+                  </button>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => {
+                      localStorage.removeItem(STORAGE_KEY);
+                      state.setSetupComplete(false);
+                      state.setWalletReady(false);
+                      state.setCurrentAccountId("");
+                      state.setAccounts([]);
+                      state.setTablePlayers([]);
+                      state.setGameIds({ roomId: "" });
+                      navigate("/", { replace: true });
+                    }}
+                  >
+                    Back to Home
+                  </button>
+                </div>
+                {ui.joinError ? <div className="error">{ui.joinError}</div> : null}
+                <p className="room-note">
+                  Don’t continue with an invalid address. Double-check before proceeding.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

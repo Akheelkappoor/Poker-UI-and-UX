@@ -8,6 +8,77 @@
   animation: fadeIn 0.6s ease-out;
 }
 
+.landing-home .top-bar {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(10, 32, 24, 0.45));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+}
+
+.landing-home .brand h1 {
+  font-size: clamp(28px, 3vw, 40px);
+}
+
+.landing-home .brand p {
+  font-size: 14px;
+  color: rgba(247, 241, 230, 0.68);
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-chip {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.2);
+  color: rgba(247, 241, 230, 0.92);
+  padding: 10px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.nav-chip:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.landing-wrap {
+  flex: 1;
+  min-height: calc(100vh - 220px);
+  display: grid;
+  place-items: center;
+  padding: 20px 0 40px;
+}
+
+.landing-room .top-bar {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(10, 32, 24, 0.35));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(14px);
+}
+
+.landing-wrap {
+  flex: 1;
+  min-height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px 0 40px;
+}
+
+.table-lip {
+  display: none;
+}
+
  
 .top-bar {
   display: flex;

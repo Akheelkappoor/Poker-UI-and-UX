@@ -20,7 +20,7 @@ const CreateJoinPage = () => {
   }, [state.gameIds.roomId, state.walletReady, navigate]);
 
   return (
-    <div className="app">
+    <div className="app landing-home">
       <ToastStack toasts={state.toasts} />
       <div className="top-bar">
         <div className="brand">
@@ -30,27 +30,48 @@ const CreateJoinPage = () => {
           </h1>
           <p>Join or create poker rooms to play with friends.</p>
         </div>
+        <nav className="top-nav" aria-label="Primary">
+          <button type="button" className="nav-chip">
+            How it works
+          </button>
+          <button type="button" className="nav-chip">
+            House rules
+          </button>
+          <button type="button" className="nav-chip">
+            Support
+          </button>
+        </nav>
       </div>
 
-      <div className="panel join-card">
-        <h2>Enter the Game</h2>
-        <p className="label">Choose how you want to enter.</p>
-        <div className="mode-toggle">
-          <button
-            className={`btn ${ui.setupMode === "create" ? "btn-primary" : "btn-secondary"}`}
-            onClick={() => ui.setSetupMode("create")}
-          >
-            Create Room
-          </button>
-          <button
-            className={`btn ${ui.setupMode === "join" ? "btn-primary" : "btn-secondary"}`}
-            onClick={() => ui.setSetupMode("join")}
-          >
-            Join Room
-          </button>
+      <div className="landing-wrap">
+        <div className="panel join-card enter-card">
+          <div className="enter-header">
+            <h2>Enter the Game</h2>
+            <p className="enter-subtitle">Choose how you want to enter.</p>
+          </div>
+          <div className="enter-tabs" role="tablist" aria-label="Entry mode">
+            <button
+              className="enter-tab"
+              role="tab"
+              aria-selected={ui.setupMode === "create"}
+              type="button"
+              onClick={() => ui.setSetupMode("create")}
+            >
+              Create Room
+            </button>
+            <button
+              className="enter-tab"
+              role="tab"
+              aria-selected={ui.setupMode === "join"}
+              type="button"
+              onClick={() => ui.setSetupMode("join")}
+            >
+              Join Room
+            </button>
+          </div>
+          {ui.setupMode === "create" ? <CreateRoomForm /> : null}
+          {ui.setupMode === "join" ? <JoinRoomForm /> : null}
         </div>
-        {ui.setupMode === "create" ? <CreateRoomForm /> : null}
-        {ui.setupMode === "join" ? <JoinRoomForm /> : null}
       </div>
     </div>
   );

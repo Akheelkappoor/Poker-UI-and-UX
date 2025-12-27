@@ -1,15 +1,17 @@
 const FeedPanel = ({ feed }) => (
-  <div className="panel">
-    <h2>Table Feed</h2>
-    <div className="feed">
-      {feed.map((item, index) => (
-        <div className="feed-item" key={`${item.label}-${index}`}>
-          <span className="feed-name">{item.label}</span>
-          <span className="label">{item.detail}</span>
-        </div>
-      ))}
+  <article className="card">
+    <div className="inner">
+      <h2>Table Feed</h2>
+      <div className="feed">
+        {feed.map((item, index) => (
+          <div className="feedItem" key={`${item.label}-${index}`}>
+            <b>{item.label}</b>
+            <span>{item.detail}</span>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
+  </article>
 );
 
 export default FeedPanel;

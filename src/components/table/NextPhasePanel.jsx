@@ -11,39 +11,51 @@ const NextPhasePanel = ({
   onReady,
   onShowdown,
 }) => (
-  <div className="panel">
-    <h2>Next Round</h2>
-    <p className="label">Current: {phase}</p>
-    <p className="label">Next: {nextPhase}</p>
-    <div className="start-row start-row-stack">
-      <span className="status-chip status-wait">
-        {readyCount}/{totalPlayers} ready
-      </span>
-      <button
-        className="btn btn-primary"
-        onClick={isShowdown ? onShowdown : onReady}
-        disabled={isShowdown ? false : isReady || nextLoading}
-      >
-        {isShowdown
-          ? nextLoading
+  <article className="card">
+    <div className="inner">
+      <h2>Next Round</h2>
+      <div className="feed">
+        <div className="feedItem">
+          <b>Current</b>
+          <span>{phase}</span>
+        </div>
+        <div className="feedItem">
+          <b>Next</b>
+          <span>{nextPhase}</span>
+        </div>
+      </div>
+      <div className="splitRow" style={{ marginTop: 12 }}>
+        <div className="pillSmall">
+          {readyCount}/{totalPlayers} Ready
+        </div>
+        <button
+          className="btn primary"
+          type="button"
+          onClick={isShowdown ? onShowdown : onReady}
+          disabled={isShowdown ? false : isReady || nextLoading}
+          style={{ flex: 1 }}
+        >
+          {isShowdown
+            ? "Showdown"
+            : nextLoading
             ? "Sending..."
-            : "Showdown"
-          : nextLoading
-          ? "Sending..."
-          : isReady
-          ? "Ready"
-          : "Ready for Next"}
-      </button>
-    </div>
-    <div className="note-stack">
+            : isReady
+            ? "Ready"
+            : "Ready for Next"}
+        </button>
+      </div>
       {!allEqual ? (
-        <div className="note">All players must have equal total bets.</div>
+        <div className="feedItem" style={{ marginTop: 10 }}>
+          <span>All players must have equal total bets.</span>
+        </div>
       ) : null}
       {notReadyNames.length > 0 ? (
-        <div className="note">Waiting for {notReadyNames.join(", ")}</div>
+        <div className="feedItem" style={{ marginTop: 10 }}>
+          <span>Waiting for {notReadyNames.join(", ")}</span>
+        </div>
       ) : null}
     </div>
-  </div>
+  </article>
 );
 
 export default NextPhasePanel;

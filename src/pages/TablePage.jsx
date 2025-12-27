@@ -51,7 +51,7 @@ const TablePage = () => {
   });
 
   return (
-    <div className="app">
+    <div className="app table-page">
       <ToastStack toasts={state.toasts} />
       {ui.roundModal.open ? <RoundModal label={ui.roundModal.label} /> : null}
       {ui.showdownModal.open ? (
@@ -75,57 +75,62 @@ const TablePage = () => {
           onRaise={handlers.handleModalRaise}
         />
       ) : null}
-      <TableHeader
-        tableName="MANO Poker"
-        currentAccount={currentAccount}
-        walletAddress={state.walletAddress}
-        playersCount={state.players.length}
-        roomId={state.gameIds.roomId}
-        isGameStarted={isGameStarted}
-      />
+      <div className="table-container">
+        <TableHeader
+          tableName="MANO Poker"
+          currentAccount={currentAccount}
+          walletAddress={state.walletAddress}
+          playersCount={state.players.length}
+          roomId={state.gameIds.roomId}
+          isGameStarted={isGameStarted}
+        />
 
-      <div className="main-grid">
-        <TablePotPanel pot={state.pot} />
-        <StackPanel
-          stack={state.stack}
-          walletBalance={state.walletBalance}
-          totalBet={getContribution(currentAccount)}
-          minPlayerBet={state.minPlayerBet}
-          maxPlayerBet={state.maxPlayerBet}
-        />
-        <ActionPanel
-          betAmount={state.betAmount}
-          chips={[5, 10, 25, 50, 100]}
-          foldLoading={ui.foldLoading}
-          hasActiveBet={hasActiveBet}
-          handleBet={handlers.handleBet}
-          handleCall={handlers.handleCall}
-          handleFold={handlers.handleFold}
-          handleRaise={handlers.handleRaise}
-          isGameStarted={isGameStarted}
-          maxBet={state.maxBet}
-          setBetAmount={state.setBetAmount}
-        />
-        <StartGamePanel
-          isGameStarted={isGameStarted}
-          startGameLoading={ui.startGameLoading}
-          handleStartGame={tableActions.handleStartGame}
-        />
-        <NextPhasePanel
-          phase={state.phase}
-          nextPhase={phaseControl.nextPhase}
-          readyCount={phaseControl.readyCount}
-          totalPlayers={state.accounts.length}
-          isReady={phaseControl.isReady}
-          allEqual={phaseControl.allEqual}
-          notReadyNames={phaseControl.notReadyNames}
-          nextLoading={ui.nextLoading}
-          isShowdown={state.phase === "Showdown"}
-          onReady={roundActions.handleNextReady}
-          onShowdown={showdownActions.openShowdown}
-        />
-        <FeedPanel feed={state.feed} />
-        <PlayersPanel players={state.players} accounts={state.accounts} />
+        <section className="gridTop">
+          <TablePotPanel pot={state.pot} />
+          <StackPanel
+            stack={state.stack}
+            walletBalance={state.walletBalance}
+            totalBet={getContribution(currentAccount)}
+            minPlayerBet={state.minPlayerBet}
+            maxPlayerBet={state.maxPlayerBet}
+          />
+          <ActionPanel
+            betAmount={state.betAmount}
+            chips={[5, 10, 25, 50, 100]}
+            foldLoading={ui.foldLoading}
+            hasActiveBet={hasActiveBet}
+            handleBet={handlers.handleBet}
+            handleCall={handlers.handleCall}
+            handleFold={handlers.handleFold}
+            handleRaise={handlers.handleRaise}
+            isGameStarted={isGameStarted}
+            maxBet={state.maxBet}
+            setBetAmount={state.setBetAmount}
+          />
+          <StartGamePanel
+            isGameStarted={isGameStarted}
+            startGameLoading={ui.startGameLoading}
+            handleStartGame={tableActions.handleStartGame}
+          />
+        </section>
+
+        <section className="gridBottom">
+          <NextPhasePanel
+            phase={state.phase}
+            nextPhase={phaseControl.nextPhase}
+            readyCount={phaseControl.readyCount}
+            totalPlayers={state.accounts.length}
+            isReady={phaseControl.isReady}
+            allEqual={phaseControl.allEqual}
+            notReadyNames={phaseControl.notReadyNames}
+            nextLoading={ui.nextLoading}
+            isShowdown={state.phase === "Showdown"}
+            onReady={roundActions.handleNextReady}
+            onShowdown={showdownActions.openShowdown}
+          />
+          <FeedPanel feed={state.feed} />
+          <PlayersPanel players={state.players} accounts={state.accounts} />
+        </section>
       </div>
 
       <TableFooter

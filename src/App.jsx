@@ -3,12 +3,18 @@ import CreateJoinPage from "./pages/CreateJoinPage";
 import RoomPage from "./pages/RoomPage";
 import TablePage from "./pages/TablePage";
 import ErrorPage from "./pages/ErrorPage";
+import HowItWorksPage from "./pages/HowItWorksPage";
+import HouseRulesPage from "./pages/HouseRulesPage";
+import SupportPage from "./pages/SupportPage";
 import { GameProvider } from "./context/GameContext";
 import "./App.css";
 
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<CreateJoinPage />} />
+    <Route path="/how-it-works" element={<HowItWorksPage />} />
+    <Route path="/house-rules" element={<HouseRulesPage />} />
+    <Route path="/support" element={<SupportPage />} />
     <Route path="/room" element={<RoomPage />} />
     <Route path="/table" element={<TablePage />} />
     <Route

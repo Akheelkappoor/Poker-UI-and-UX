@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ToastStack from "../components/ToastStack";
 import { useGame } from "../context/GameContext";
 import CreateRoomForm from "../components/setup/CreateRoomForm";
@@ -31,15 +31,15 @@ const CreateJoinPage = () => {
           <p>Join or create poker rooms to play with friends.</p>
         </div>
         <nav className="top-nav" aria-label="Primary">
-          <button type="button" className="nav-chip">
+          <Link className="nav-chip" to="/how-it-works">
             How it works
-          </button>
-          <button type="button" className="nav-chip">
+          </Link>
+          <Link className="nav-chip" to="/house-rules">
             House rules
-          </button>
-          <button type="button" className="nav-chip">
+          </Link>
+          <Link className="nav-chip" to="/support">
             Support
-          </button>
+          </Link>
         </nav>
       </div>
 

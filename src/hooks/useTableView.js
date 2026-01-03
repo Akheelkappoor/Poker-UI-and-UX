@@ -26,7 +26,11 @@ const useTableView = ({
     );
   }, [accounts, walletAddress, displayName, currentAccountId]);
 
-  const isGameStarted = gameStatus === "STARTED";
+  const normalizedStatus = String(gameStatus || "").trim().toUpperCase();
+  const isGameStarted =
+    normalizedStatus === "STARTED" ||
+    normalizedStatus === "PLAYING" ||
+    normalizedStatus === "LIVE";
   const hasUserBet = currentAccount?.id
     ? Boolean(betTracker[currentAccount.id])
     : false;

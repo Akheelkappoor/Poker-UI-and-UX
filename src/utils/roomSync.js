@@ -1,5 +1,5 @@
 import { getRoom } from "../services/api";
-import { calcPot, normalizeAccounts } from "./game";
+import { calcPot, getRoomLimits, getRoomPotLimit, normalizeAccounts } from "./game";
 import { normalizeRound } from "./round";
 import { buildFeedFromAccounts, mergeFeed } from "./feed";
 
@@ -14,6 +14,9 @@ const syncRoom = async ({
   setWalletReady,
   currentAccountId,
   setFeed,
+  setMinPlayerBet,
+  setMaxPlayerBet,
+  setMaxPot,
 }) => {
   if (!roomId) {
     return;
@@ -41,6 +44,23 @@ const syncRoom = async ({
   );
   if (setPot) {
     setPot(calcPot(normalized));
+  }
+  if (setMinPlayerBet || setMaxPlayerBet) {
+    const limits = getRoomLimits(data);
+    if (limits) {
+      if (setMinPlayerBet) {
+        setMinPlayerBet(limits.min);
+      }
+      if (setMaxPlayerBet) {
+        setMaxPlayerBet(limits.max);
+      }
+    }
+  }
+  if (setMaxPot) {
+    const potLimit = getRoomPotLimit(data);
+    if (potLimit !== null) {
+      setMaxPot(potLimit);
+    }
   }
   if (setWalletReady && currentAccountId) {
     const current = normalized.find(

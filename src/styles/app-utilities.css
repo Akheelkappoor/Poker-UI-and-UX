@@ -20,6 +20,12 @@
   gap: 4px;
 }
 
+.toast.error {
+  border-color: rgba(224, 78, 78, 0.65);
+  background: rgba(55, 12, 12, 0.92);
+  color: rgba(255, 220, 220, 0.9);
+}
+
 .foot-actions {
   display: flex;
   justify-content: flex-end;

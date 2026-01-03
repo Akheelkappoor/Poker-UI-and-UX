@@ -91,3 +91,53 @@ export const calcStackFromBalance = (account) => {
     stack: Math.max(0, balance - used),
   };
 };
+
+export const getRoomLimits = (data) => {
+  const sources = [data, data?.room, data?.data, data?.room?.data];
+  const fields = [
+    { min: "min_amount", max: "max_amount" },
+    { min: "minAmount", max: "maxAmount" },
+    { min: "min_bet", max: "max_bet" },
+    { min: "minBet", max: "maxBet" },
+    { min: "min_player_bet", max: "max_player_bet" },
+    { min: "minPlayerBet", max: "maxPlayerBet" },
+    { min: "min", max: "max" },
+  ];
+  for (const source of sources) {
+    if (!source || typeof source !== "object") {
+      continue;
+    }
+    for (const { min, max } of fields) {
+      const minValue = Number(source[min]);
+      const maxValue = Number(source[max]);
+      if (!Number.isNaN(minValue) && !Number.isNaN(maxValue)) {
+        return { min: minValue, max: maxValue };
+      }
+    }
+  }
+  return null;
+};
+
+export const getRoomPotLimit = (data) => {
+  const sources = [data, data?.room, data?.data, data?.room?.data];
+  const fields = [
+    "max_pot",
+    "maxPot",
+    "max_pot_size",
+    "maxPotSize",
+    "max_pot_amount",
+    "maxPotAmount",
+  ];
+  for (const source of sources) {
+    if (!source || typeof source !== "object") {
+      continue;
+    }
+    for (const field of fields) {
+      const value = Number(source[field]);
+      if (!Number.isNaN(value)) {
+        return value;
+      }
+    }
+  }
+  return null;
+};

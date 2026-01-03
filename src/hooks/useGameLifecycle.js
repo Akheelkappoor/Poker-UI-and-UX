@@ -35,6 +35,9 @@ const useGameLifecycle = ({ state, ui }) => {
     currentAccountId: state.currentAccountId,
     setPot: state.setPot,
     setPhase: state.setPhase,
+    setMinPlayerBet: state.setMinPlayerBet,
+    setMaxPlayerBet: state.setMaxPlayerBet,
+    setMaxPot: state.setMaxPot,
     getRoomUrl: ui.urls.getRoomUrl,
   });
 
@@ -50,6 +53,9 @@ const useGameLifecycle = ({ state, ui }) => {
     setWalletReady: state.setWalletReady,
     currentAccountId: state.currentAccountId,
     setFeed: state.setFeed,
+    setMinPlayerBet: state.setMinPlayerBet,
+    setMaxPlayerBet: state.setMaxPlayerBet,
+    setMaxPot: state.setMaxPot,
   });
 
   useRoundAnnouncement(state.phase, ui.setRoundModal);

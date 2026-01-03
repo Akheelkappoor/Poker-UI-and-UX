@@ -13,6 +13,9 @@ const useRoomSocket = ({
   setWalletReady,
   currentAccountId,
   setFeed,
+  setMinPlayerBet,
+  setMaxPlayerBet,
+  setMaxPot,
 }) => {
   const socketRef = useRef(null);
 
@@ -39,6 +42,9 @@ const useRoomSocket = ({
         setWalletReady,
         currentAccountId,
         setFeed,
+        setMinPlayerBet,
+        setMaxPlayerBet,
+        setMaxPot,
       });
     };
 
@@ -57,6 +63,9 @@ const useRoomSocket = ({
     setWalletReady,
     currentAccountId,
     setFeed,
+    setMinPlayerBet,
+    setMaxPlayerBet,
+    setMaxPot,
     socketBaseUrl,
   ]);
 };

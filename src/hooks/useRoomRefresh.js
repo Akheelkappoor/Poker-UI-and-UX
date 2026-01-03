@@ -12,6 +12,9 @@ const useRoomRefresh = ({
   setPot,
   setPhase,
   getRoomUrl,
+  setMinPlayerBet,
+  setMaxPlayerBet,
+  setMaxPot,
 }) => {
   useEffect(() => {
     const refreshRoom = async () => {
@@ -26,6 +29,9 @@ const useRoomRefresh = ({
         setWalletReady,
         currentAccountId,
         setFeed,
+        setMinPlayerBet,
+        setMaxPlayerBet,
+        setMaxPot,
       });
     };
 
@@ -41,6 +47,9 @@ const useRoomRefresh = ({
     setPot,
     setPhase,
     getRoomUrl,
+    setMinPlayerBet,
+    setMaxPlayerBet,
+    setMaxPot,
   ]);
 };
 

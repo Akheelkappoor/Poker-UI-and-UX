@@ -7,30 +7,9 @@ const TableHeader = ({
   playersCount,
   roomId,
   isGameStarted,
-  phase,
-  nextPhase,
-  showInfo,
-  onToggleInfo,
-  handleLeave,
-  leaveLoading,
 }) => {
   const [showPoolAddress, setShowPoolAddress] = useState(false);
   const [showWalletAddress, setShowWalletAddress] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
-
-  const handleCopyRoom = async () => {
-    if (!roomId) return;
-    try {
-      await navigator.clipboard.writeText(roomId);
-    } catch {
-      const area = document.createElement("textarea");
-      area.value = roomId;
-      document.body.appendChild(area);
-      area.select();
-      document.execCommand("copy");
-      area.remove();
-    }
-  };
 
   const formatAddress = (value) => {
     if (!value) return "—";
@@ -41,60 +20,10 @@ const TableHeader = ({
   return (
     <header className="topbar">
       <div className="brand">
-        <div className="brandRow">
-          <h1>
-            MANO <span className="gold">Poker</span>
-          </h1>
-          <div className="headerIcons">
-            <button
-              className={`iconBtn${showDetails ? " active" : ""}`}
-              type="button"
-              aria-label={showDetails ? "Hide room details" : "Show room details"}
-              aria-expanded={showDetails}
-              onClick={() => setShowDetails((value) => !value)}
-              title={showDetails ? "Hide room details" : "Room details"}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M12 10v6" />
-                <path d="M12 7h.01" />
-              </svg>
-            </button>
-            <button
-              className={`iconBtn${showInfo ? " active" : ""}`}
-              type="button"
-              onClick={onToggleInfo}
-              aria-expanded={showInfo}
-              aria-label={showInfo ? "Hide table info" : "Show table info"}
-              title="Table info"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M12 3l9 9-9 9-9-9 9-9Z" />
-                <path d="M12 9v6" />
-                <path d="M12 7h.01" />
-              </svg>
-            </button>
-            <button
-              className="leaveBtn"
-              type="button"
-              onClick={handleLeave}
-              disabled={leaveLoading}
-              aria-label={leaveLoading ? "Leaving table" : "Leave table"}
-              title={leaveLoading ? "Leaving..." : "Leave table"}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M15 5h4a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4" />
-                <path d="M10 17l5-5-5-5" />
-                <path d="M15 12H3" />
-              </svg>
-              <span className="sr-only">
-                {leaveLoading ? "Leaving..." : "Leave table"}
-              </span>
-            </button>
-          </div>
-        </div>
-        {showDetails ? (
-          <div className="addrBlock">
+        <h1>
+          MANO <span className="gold">Poker</span>
+        </h1>
+        <div className="addrBlock">
           <div className="addrRow">
             <div className="addrLabel">
               <b>Pool Address</b>
@@ -169,25 +98,16 @@ const TableHeader = ({
             </div>
           </div>
         </div>
-        ) : null}
       </div>
       <div className="status">
-        <div className="pill statusPill">
+        <div className="pill gold">
           <span className="dot" />
           {isGameStarted ? "Live Hand" : "Waiting"}
         </div>
-        <div className="statusMeta">
-          <span className="metaText">{playersCount} players</span>
-          <span className="metaSep">•</span>
-          <button className="roomChip" type="button" onClick={handleCopyRoom}>
-            Room <span className="mono">{roomId}</span>
-          </button>
+        <div className="pill">{playersCount} Players</div>
+        <div className="pill">
+          Room <span className="mono">{roomId}</span>
         </div>
-        {isGameStarted ? (
-          <div className="pill phasePill">
-            {phase} <span className="phaseArrow">→</span> {nextPhase}
-          </div>
-        ) : null}
       </div>
     </header>
   );

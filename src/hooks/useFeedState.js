@@ -6,11 +6,17 @@ const useFeedState = (persistedFeed) => {
   const [toasts, setToasts] = useState([]);
 
   const updateFeed = (label, detail) => {
-    setFeed((prev) => [{ label, detail }, ...prev].slice(0, 5));
+    const isError =
+      label === "Table" ||
+      /error|failed|unable|exceed|below|must|missing|rejected|not allowed|only allowed|too low|no active/i.test(
+        detail
+      );
+    setFeed((prev) => [{ label, detail, isError }, ...prev].slice(0, 5));
     const toast = {
       id: `${Date.now()}-${Math.random()}`,
       title: label,
       detail,
+      isError,
     };
     setToasts((prev) => [toast, ...prev].slice(0, 3));
     setTimeout(() => {

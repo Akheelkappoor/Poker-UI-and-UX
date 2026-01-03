@@ -14,7 +14,7 @@ const sortPlayers = (players) => {
 const PlayersPanel = ({ players, accounts }) => {
   const ordered = sortPlayers(players);
   return (
-    <article className="card">
+    <article className="card players-card" id="desktopTab-players">
       <div className="inner">
         <div className="playersHdr">
           <div>

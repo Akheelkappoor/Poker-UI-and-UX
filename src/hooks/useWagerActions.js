@@ -4,7 +4,9 @@ import {
   clamp,
   findAccount,
   findAccountById,
+  getRoomLimits,
   normalizeAccounts,
+  getRoomPotLimit,
 } from "../utils/game";
 import { formatNumber } from "../utils/format";
 
@@ -24,6 +26,9 @@ const useWagerActions = ({
   setCallAmount,
   setGameStatus,
   setTablePlayers,
+  setMinPlayerBet,
+  setMaxPlayerBet,
+  setMaxPot,
   updateFeed,
   walletAddress,
   walletBalance,
@@ -68,6 +73,21 @@ const useWagerActions = ({
       if (refresh.data?.status) {
         setGameStatus(refresh.data.status);
       }
+      const limits = getRoomLimits(refresh.data);
+      if (limits) {
+        if (setMinPlayerBet) {
+          setMinPlayerBet(limits.min);
+        }
+        if (setMaxPlayerBet) {
+          setMaxPlayerBet(limits.max);
+        }
+      }
+      if (setMaxPot) {
+        const potLimit = getRoomPotLimit(refresh.data);
+        if (potLimit !== null) {
+          setMaxPot(potLimit);
+        }
+      }
       const normalized = normalizeAccounts(refresh.data);
       if (normalized.length > 0) {
         setAccounts(normalized);
@@ -79,7 +99,15 @@ const useWagerActions = ({
         );
       }
     },
-    [getRoomUrl, setAccounts, setGameStatus, setTablePlayers]
+    [
+      getRoomUrl,
+      setAccounts,
+      setGameStatus,
+      setTablePlayers,
+      setMinPlayerBet,
+      setMaxPlayerBet,
+      setMaxPot,
+    ]
   );
 
   const applyRaiseApi = useCallback(

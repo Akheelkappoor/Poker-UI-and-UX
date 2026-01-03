@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import ToastStack from "../components/ToastStack";
 import { useGame } from "../context/GameContext";
@@ -14,6 +13,7 @@ import StartGamePanel from "../components/table/StartGamePanel";
 import NextPhasePanel from "../components/table/NextPhasePanel";
 import FeedPanel from "../components/table/FeedPanel";
 import PlayersPanel from "../components/table/PlayersPanel";
+import TableFooter from "../components/table/TableFooter";
 import StartGameModal from "../components/table/StartGameModal";
 import RoundModal from "../components/table/RoundModal";
 import ShowdownModal from "../components/table/ShowdownModal";
@@ -21,8 +21,6 @@ import ShowdownModal from "../components/table/ShowdownModal";
 const TablePage = () => {
   const { state, ui, handlers, tableActions, roundActions, showdownActions } =
     useGame();
-  const [showInfo, setShowInfo] = useState(false);
-  const [desktopTab, setDesktopTab] = useState("table");
 
   if (!state.setupComplete || !state.walletReady) {
     return <Navigate to="/" replace />;
@@ -76,12 +74,9 @@ const TablePage = () => {
           onCall={handlers.handleModalCall}
           onFold={handlers.handleModalFold}
           onRaise={handlers.handleModalRaise}
-          onClose={() => ui.setActionModal({ open: false, callAmount: 0 })}
         />
       ) : null}
-      <div
-        className={`table-container${showInfo ? " show-info" : ""} desktop-tab-${desktopTab}`}
-      >
+      <div className="table-container">
         <TableHeader
           tableName="MANO Poker"
           currentAccount={currentAccount}
@@ -89,47 +84,9 @@ const TablePage = () => {
           playersCount={state.players.length}
           roomId={state.gameIds.roomId}
           isGameStarted={isGameStarted}
-          phase={state.phase}
-          nextPhase={phaseControl.nextPhase}
-          showInfo={showInfo}
-          onToggleInfo={() => setShowInfo((value) => !value)}
-          handleLeave={tableActions.handleLeave}
-          leaveLoading={ui.leaveLoading}
         />
-        <div className="desktopTabs" role="tablist" aria-label="Desktop sections">
-          <button
-            className="desktopTab"
-            type="button"
-            role="tab"
-            aria-selected={desktopTab === "table"}
-            aria-controls="desktopTab-table"
-            onClick={() => setDesktopTab("table")}
-          >
-            Table
-          </button>
-          <button
-            className="desktopTab"
-            type="button"
-            role="tab"
-            aria-selected={desktopTab === "players"}
-            aria-controls="desktopTab-players"
-            onClick={() => setDesktopTab("players")}
-          >
-            Players
-          </button>
-          <button
-            className="desktopTab"
-            type="button"
-            role="tab"
-            aria-selected={desktopTab === "feed"}
-            aria-controls="desktopTab-feed"
-            onClick={() => setDesktopTab("feed")}
-          >
-            Feed
-          </button>
-        </div>
 
-        <section className="gridTop" id="desktopTab-table">
+        <section className="gridTop">
           <TablePotPanel pot={state.pot} />
           <StackPanel
             stack={state.stack}
@@ -147,35 +104,36 @@ const TablePage = () => {
             handleRaise={handlers.handleRaise}
             isGameStarted={isGameStarted}
           />
-          {!isGameStarted ? (
-            <StartGamePanel
-              isGameStarted={isGameStarted}
-              startGameLoading={ui.startGameLoading}
-              handleStartGame={tableActions.handleStartGame}
-            />
-          ) : null}
+          <StartGamePanel
+            isGameStarted={isGameStarted}
+            startGameLoading={ui.startGameLoading}
+            handleStartGame={tableActions.handleStartGame}
+          />
         </section>
 
         <section className="gridBottom">
-          {isGameStarted ? (
-            <NextPhasePanel
-              phase={state.phase}
-              nextPhase={phaseControl.nextPhase}
-              readyCount={phaseControl.readyCount}
-              totalPlayers={state.accounts.length}
-              isReady={phaseControl.isReady}
-              allEqual={phaseControl.allEqual}
-              notReadyNames={phaseControl.notReadyNames}
-              nextLoading={ui.nextLoading}
-              isShowdown={state.phase === "Showdown"}
-              onReady={roundActions.handleNextReady}
-              onShowdown={showdownActions.openShowdown}
-            />
-          ) : null}
+          <NextPhasePanel
+            phase={state.phase}
+            nextPhase={phaseControl.nextPhase}
+            readyCount={phaseControl.readyCount}
+            totalPlayers={state.accounts.length}
+            isReady={phaseControl.isReady}
+            allEqual={phaseControl.allEqual}
+            notReadyNames={phaseControl.notReadyNames}
+            nextLoading={ui.nextLoading}
+            isShowdown={state.phase === "Showdown"}
+            onReady={roundActions.handleNextReady}
+            onShowdown={showdownActions.openShowdown}
+          />
           <FeedPanel feed={state.feed} />
           <PlayersPanel players={state.players} accounts={state.accounts} />
         </section>
       </div>
+
+      <TableFooter
+        handleLeave={tableActions.handleLeave}
+        leaveLoading={ui.leaveLoading}
+      />
 
       {ui.startGameOpen ? (
         <StartGameModal

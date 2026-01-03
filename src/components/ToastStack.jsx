@@ -5,7 +5,7 @@ const ToastStack = ({ toasts }) => {
   return (
     <div className="toast-stack">
       {toasts.map((toast) => (
-        <div className="toast" key={toast.id}>
+        <div className={`toast${toast.isError ? " error" : ""}`} key={toast.id}>
           <strong>{toast.title}</strong>
           <span className="label">{toast.detail}</span>
         </div>

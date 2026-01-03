@@ -28,7 +28,7 @@ export const useGameState = () => {
   const [readyPlayers, setReadyPlayers] = useState({});
   const [currentAccountId, setCurrentAccountId] = useState(persistedUserId);
   const [maxPlayerBet, setMaxPlayerBet] = useState(persisted.maxPlayerBet ?? 200);
-  const [maxPot, setMaxPot] = useState(persisted.maxPot ?? 1000);
+  const [maxPot, setMaxPot] = useState(persisted.maxPot ?? Number.POSITIVE_INFINITY);
   const [walletBalance, setWalletBalance] = useState(persisted.walletBalance ?? 500);
   const [gameStatus, setGameStatus] = useState(persisted.gameStatus || "");
   const [setupComplete, setSetupComplete] = useState(
@@ -85,6 +85,12 @@ export const useGameState = () => {
     callAmount,
     setCallAmount,
   ]);
+
+  useEffect(() => {
+    if (minPlayerBet > 0 && betAmount !== minPlayerBet) {
+      setBetAmount(minPlayerBet);
+    }
+  }, [betAmount, minPlayerBet]);
 
   useEffect(() => {
     if (!currentAccountId || accounts.length === 0) {

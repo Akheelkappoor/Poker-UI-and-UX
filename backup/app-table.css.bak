@@ -70,60 +70,6 @@
   letter-spacing: 0.2px;
 }
 
-.table-page .brand {
-  width: 100%;
-}
-
-.table-page .brandRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.table-page .headerIcons {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.table-page .iconBtn {
-  height: 34px;
-  width: 34px;
-  padding: 0;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.2);
-  color: rgba(255, 255, 255, 0.9);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-}
-
-.table-page .iconBtn svg {
-  width: 16px;
-  height: 16px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.8;
-}
-
-.table-page .iconBtn.active {
-  border-color: rgba(163, 126, 44, 0.55);
-  background: rgba(163, 126, 44, 0.18);
-  color: rgba(255, 236, 190, 0.95);
-}
-
-.table-page .iconBtn:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.22);
-}
-
 .table-page .detailsToggle {
   margin-top: 10px;
   display: inline-flex;
@@ -208,10 +154,6 @@
     0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-.table-page .addrCard:has(.addrValue.reveal) {
-  flex-wrap: wrap;
-}
-
 .table-page .addrValue {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
@@ -230,7 +172,6 @@
   text-overflow: clip;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
-  max-width: 100%;
 }
 
 .table-page .addrValue.reveal::-webkit-scrollbar {
@@ -325,90 +266,6 @@
   z-index: 1;
 }
 
-.table-page .desktopTabs {
-  display: none;
-}
-
-.table-page .statusPill {
-  border-color: rgba(110, 231, 183, 0.28);
-  background: rgba(8, 22, 16, 0.4);
-}
-
-.table-page .statusMeta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 12px;
-}
-
-.table-page .metaSep {
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.table-page .roomChip {
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.18);
-  color: rgba(255, 255, 255, 0.9);
-  padding: 6px 10px;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.table-page .roomChip:hover {
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.table-page .leaveBtn {
-  height: 34px;
-  width: 34px;
-  padding: 0;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.2);
-  color: rgba(255, 255, 255, 0.9);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-}
-
-.table-page .leaveBtn svg {
-  width: 16px;
-  height: 16px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.8;
-}
-
-.table-page .leaveBtn:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.22);
-}
-
-.table-page .leaveBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.table-page .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
 .table-page .pill {
   display: inline-flex;
   align-items: center;
@@ -424,36 +281,9 @@
   white-space: nowrap;
 }
 
-.table-page .infoToggle {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.24);
-  cursor: pointer;
-}
-
-.table-page .infoToggle.active {
-  border-color: rgba(163, 126, 44, 0.55);
-  color: rgba(255, 236, 190, 0.95);
-}
-
 @media (max-width: 720px) {
   .table-page .topbar {
     padding: 16px 14px 18px;
-  }
-
-  .table-page .topbar::before {
-    display: none;
-  }
-
-  .table-page .brand h1 {
-    font-size: clamp(22px, 6vw, 30px);
-  }
-
-  .table-page .status {
-    justify-content: flex-start;
-  }
-
-  .table-page .phasePill {
-    display: none;
   }
 
   .table-page .addrBlock {
@@ -480,10 +310,6 @@
     justify-content: flex-end;
   }
 
-  .table-page .addrValue.reveal {
-    width: 100%;
-  }
-
   .table-page .copyBtn.compact {
     height: 34px;
     padding: 0 14px;
@@ -506,197 +332,8 @@
   }
 }
 
-@media (min-width: 721px) {
-  .table-page .actionPanel h2,
-  .table-page .actionPanel .kicker {
-    display: none;
-  }
-
-  .table-page .actionPanel .inner {
-    padding: 14px 16px;
-  }
-
-  .table-page .actionPanel .actionButtons {
-    margin-top: 0;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
-}
-
-@media (min-width: 721px) and (max-width: 1200px) {
-  .table-page .table-container {
-    padding-bottom: 120px;
-  }
-
-  .table-page .actionPanel {
-    position: fixed;
-    left: 16px;
-    right: 16px;
-    bottom: calc(12px + env(safe-area-inset-bottom));
-    z-index: 30;
-    border-radius: 18px;
-    border-color: rgba(255, 255, 255, 0.18);
-    background: linear-gradient(
-      160deg,
-      rgba(8, 18, 13, 0.92),
-      rgba(8, 18, 13, 0.8)
-    );
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-  }
-}
-
-@media (min-width: 1024px) {
-  .table-page {
-    width: min(1400px, calc(100% - 48px));
-  }
-
-  .table-page .table-container {
-    gap: 18px;
-  }
-
-  .table-page .gridTop {
-    grid-template-columns: minmax(260px, 1.1fr) minmax(260px, 1fr) minmax(260px, 1fr);
-    align-items: start;
-  }
-
-  .table-page .gridBottom {
-    grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr);
-    align-items: start;
-  }
-
-  .table-page .actionPanel {
-    position: sticky;
-    top: 16px;
-  }
-
-  .table-page .infoToggle {
-    display: none;
-  }
-
-  .table-page .desktopTabs {
-    display: inline-flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-  }
-
-  .table-page .desktopTab {
-    height: 36px;
-    padding: 0 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(0, 0, 0, 0.18);
-    color: rgba(255, 255, 255, 0.86);
-    font-weight: 800;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-  }
-
-  .table-page .desktopTab[aria-selected="true"] {
-    border-color: rgba(163, 126, 44, 0.55);
-    background: linear-gradient(
-      180deg,
-      rgba(163, 126, 44, 0.28),
-      rgba(163, 126, 44, 0.12)
-    );
-    color: rgba(255, 236, 190, 0.95);
-  }
-
-  .table-page .desktopTab:hover {
-    transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.24);
-  }
-
-  .table-page .gridTop {
-    display: none;
-  }
-
-  .table-page .desktop-tab-table .gridTop {
-    display: grid;
-  }
-
-  .table-page .desktop-tab-table .feed-card,
-  .table-page .desktop-tab-table .players-card {
-    display: none;
-  }
-
-  .table-page .desktop-tab-table .gridTop {
-    grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr);
-  }
-
-  .table-page .desktop-tab-table .actionPanel {
-    grid-column: 1 / -1;
-    position: static;
-    border-radius: 18px;
-    border-color: rgba(255, 255, 255, 0.18);
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-  }
-
-  .table-page .desktop-tab-table .actionButtons {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  }
-
-  .table-page .desktop-tab-table .gridBottom {
-    grid-template-columns: 1fr;
-  }
-
-  .table-page .desktop-tab-feed .gridTop,
-  .table-page .desktop-tab-feed .players-card,
-  .table-page .desktop-tab-feed .next-round-card {
-    display: none;
-  }
-
-  .table-page .desktop-tab-players .gridTop,
-  .table-page .desktop-tab-players .feed-card,
-  .table-page .desktop-tab-players .next-round-card {
-    display: none;
-  }
-}
-
-@media (min-width: 1201px) {
-  .table-page {
-    width: min(1520px, calc(100% - 64px));
-  }
-
-  .table-page .gridTop {
-    grid-template-columns: minmax(300px, 1.2fr) minmax(320px, 1fr) minmax(280px, 0.9fr);
-  }
-
-  .table-page .gridBottom {
-    grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr) minmax(320px, 1fr);
-  }
-}
-
-@media (min-width: 900px) {
-  .table-page .gridTop {
-    grid-template-columns: minmax(280px, 1.1fr) minmax(300px, 1fr) minmax(260px, 0.9fr);
-  }
-
-  .table-page .gridBottom {
-    grid-template-columns: repeat(3, minmax(280px, 1fr));
-    grid-auto-flow: row dense;
-  }
-
-  .table-page .players-card {
-    grid-column: 3;
-  }
-}
-
 .table-page .pill.gold {
   border-color: rgba(163, 126, 44, 0.32);
-}
-
-.table-page .phasePill {
-  border-color: rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.18);
-}
-
-.table-page .phasePill .phaseArrow {
-  color: rgba(255, 255, 255, 0.55);
 }
 
 .table-page .dot {
@@ -717,14 +354,14 @@
 .table-page .gridTop {
   margin-top: 16px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
 
 .table-page .gridBottom {
   margin-top: 14px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -923,17 +560,6 @@
   gap: 10px;
 }
 
-.table-page .actionPanel .inner {
-  padding: 14px 16px 12px;
-}
-
-.table-page .actionButtons {
-  margin-top: 10px;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-}
-
 .table-page .btn {
   height: 42px;
   border-radius: 14px;
@@ -994,38 +620,6 @@
   display: grid;
   gap: 10px;
   margin-top: 10px;
-}
-
-.table-page .phaseStrip {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(0, 0, 0, 0.16);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.table-page .phaseDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(110, 231, 183, 0.85);
-  box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.14);
-}
-
-.table-page .phaseText {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.table-page .phaseArrow {
-  color: rgba(255, 255, 255, 0.5);
 }
 
 .table-page .feedItem {
@@ -1106,15 +700,14 @@
 
 @media (max-width: 1100px) {
   .table-page .gridTop {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .table-page .gridBottom {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 720px) {
-  .table-page .table-container {
-    padding-bottom: 120px;
-  }
-
   .table-page .gridTop,
   .table-page .gridBottom {
     grid-template-columns: 1fr;
@@ -1122,109 +715,5 @@
 
   .table-page .status {
     justify-content: flex-start;
-  }
-
-  .table-page .gridTop {
-    gap: 10px;
-    margin-top: 12px;
-  }
-
-  .table-page .card {
-    border-radius: 18px;
-    box-shadow: none;
-  }
-
-  .table-page .card::before {
-    display: none;
-  }
-
-  .table-page .card h2 {
-    font-size: 18px;
-    margin-bottom: 6px;
-  }
-
-  .table-page .gauge {
-    width: 140px;
-    height: 140px;
-  }
-
-  .table-page .gaugeAmount .amount {
-    font-size: 34px;
-  }
-
-  .table-page .stackTop .big .amount {
-    font-size: 30px;
-  }
-
-  .table-page .kvRow {
-    padding: 8px 10px;
-  }
-
-  .table-page .actionPanel {
-    position: fixed;
-    left: 12px;
-    right: 12px;
-    bottom: calc(10px + env(safe-area-inset-bottom));
-    z-index: 30;
-    border-radius: 18px;
-    border-color: rgba(255, 255, 255, 0.18);
-    background: linear-gradient(
-      160deg,
-      rgba(8, 18, 13, 0.92),
-      rgba(8, 18, 13, 0.8)
-    );
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-  }
-
-  .table-page .actionPanel h2,
-  .table-page .actionPanel .kicker {
-    display: none;
-  }
-
-  .table-page .actionButtons {
-    margin-top: 0;
-    gap: 8px;
-    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  }
-
-  .table-page .btn {
-    height: 40px;
-    font-size: 13px;
-  }
-
-  .table-page .table-container:not(.show-info) .feed-card,
-  .table-page .table-container:not(.show-info) .players-card {
-    display: none;
-  }
-}
-
-.table-page .pot-card .gauge {
-  width: 220px;
-  height: 220px;
-}
-
-.table-page .pot-card .gaugeAmount .amount {
-  font-size: 56px;
-}
-
-@media (max-width: 720px) {
-  .table-page .pot-card .gauge {
-    width: 170px;
-    height: 170px;
-  }
-
-  .table-page .pot-card .gaugeAmount .amount {
-    font-size: 40px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .table-page .pot-card .gauge {
-    width: 240px;
-    height: 240px;
-  }
-
-  .table-page .pot-card .gaugeAmount .amount {
-    font-size: 64px;
   }
 }

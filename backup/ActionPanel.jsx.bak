@@ -1,0 +1,50 @@
+const ActionPanel = ({
+  error,
+  foldLoading,
+  hasActiveBet,
+  handleBet,
+  handleCall,
+  handleFold,
+  handleRaise,
+  isGameStarted,
+}) => (
+  <article className="card">
+    <div className="inner">
+      <h2>Action</h2>
+      <p className="kicker">Set amount, then choose an action.</p>
+      <div className="btnCol">
+        <button
+          className="btn"
+          onClick={handleCall}
+          disabled={!isGameStarted || !hasActiveBet}
+        >
+          Call
+        </button>
+        <button
+          className="btn primary"
+          onClick={handleBet}
+          disabled={!isGameStarted}
+        >
+          Bet
+        </button>
+        <button
+          className="btn primary"
+          onClick={handleRaise}
+          disabled={!isGameStarted || !hasActiveBet}
+        >
+          Raise
+        </button>
+        <button
+          className="btn danger"
+          onClick={handleFold}
+          disabled={!isGameStarted || foldLoading}
+        >
+          {foldLoading ? "Folding..." : "Fold"}
+        </button>
+      </div>
+      {error ? <div className="error">{error}</div> : null}
+    </div>
+  </article>
+);
+
+export default ActionPanel;

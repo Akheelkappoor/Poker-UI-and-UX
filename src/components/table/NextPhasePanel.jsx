@@ -11,19 +11,9 @@ const NextPhasePanel = ({
   onReady,
   onShowdown,
 }) => (
-  <article className="card">
+  <article className="card next-round-card">
     <div className="inner">
       <h2>Next Round</h2>
-      <div className="feed">
-        <div className="feedItem">
-          <b>Current</b>
-          <span>{phase}</span>
-        </div>
-        <div className="feedItem">
-          <b>Next</b>
-          <span>{nextPhase}</span>
-        </div>
-      </div>
       <div className="splitRow" style={{ marginTop: 12 }}>
         <div className="pillSmall">
           {readyCount}/{totalPlayers} Ready

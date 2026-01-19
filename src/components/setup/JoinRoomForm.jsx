@@ -30,13 +30,13 @@ const JoinRoomForm = () => {
           {ui.joinError ? <div className="error">{ui.joinError}</div> : null}
           {ui.joinRoomPlayers.length > 0 ? (
             <div className="join-room">
-              <div className="field-group">
-                <label className="label">Choose your name</label>
-                <div className="player-list">
-                  {ui.joinRoomPlayers.map((player) => (
-                    <label className="player-select" key={`join-${player.id}`}>
-                      <input
-                        type="radio"
+                <div className="field-group">
+                  <label className="label">Choose your name</label>
+                  <div>
+                    {ui.joinRoomPlayers.map((player) => (
+                      <label className="player-select" key={`join-${player.id}`}>
+                        <input
+                          type="radio"
                         name="join-player"
                         value={player.id}
                         checked={String(ui.joinSelectedId) === String(player.id)}
@@ -48,7 +48,10 @@ const JoinRoomForm = () => {
                 </div>
               </div>
               {(() => {
-                if (selectedJoinPlayer?.status || selectedJoinPlayer?.address) {
+                const hasWalletOnFile = Boolean(
+                  selectedJoinPlayer?.userAddress || selectedJoinPlayer?.address
+                );
+                if (hasWalletOnFile) {
                   return <p className="label">Wallet address already on file.</p>;
                 }
                 return (
@@ -58,7 +61,7 @@ const JoinRoomForm = () => {
                       type="text"
                       value={ui.joinWalletAddress}
                       onChange={(event) => ui.setJoinWalletAddress(event.target.value)}
-                      placeholder="Ox..."
+                      placeholder="0x..."
                     />
                   </div>
                 );

@@ -44,7 +44,7 @@ const CreateJoinPage = () => {
       </div>
 
       <div className="landing-wrap">
-        <div className="panel join-card enter-card">
+        <div className="panel join-card">
           <div className="enter-header">
             <h2>Enter the Game</h2>
             <p className="enter-subtitle">Choose how you want to enter.</p>

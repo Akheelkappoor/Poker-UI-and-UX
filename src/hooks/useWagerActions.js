@@ -47,7 +47,7 @@ const useWagerActions = ({
         updateFeed("Table", "That exceeds the admin max bet per player.");
         return false;
       }
-      if (amount + (Number(callAmount) || 0) > maxPot) {
+      if (amount > maxPot) {
         updateFeed("Table", "That would exceed the admin max pot size.");
         return false;
       }
@@ -126,7 +126,6 @@ const useWagerActions = ({
       }
       const wager = clamp(amount, 1, stack);
       if (!validateWager(wager)) {
-        updateFeed("Table", "Action rejected by limits");
         return;
       }
       const { response, data } = await raise(raiseUrl, {

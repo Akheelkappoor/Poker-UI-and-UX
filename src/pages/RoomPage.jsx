@@ -69,12 +69,8 @@ const RoomPage = () => {
   ]);
 
   const handleContinue = useCallback(() => {
-    if (ui.joinError) {
-      handleRetryJoin();
-      return;
-    }
-    state.setWalletReady(true);
-  }, [handleRetryJoin, state.setWalletReady, ui.joinError]);
+    handleRetryJoin();
+  }, [handleRetryJoin]);
 
   const handleCopyRoomId = useCallback(async () => {
     if (!state.gameIds.roomId) {

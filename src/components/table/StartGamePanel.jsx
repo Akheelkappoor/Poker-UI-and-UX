@@ -1,5 +1,5 @@
 const StartGamePanel = ({ isGameStarted, startGameLoading, handleStartGame }) => (
-  <article className="card start-game-card">
+  <article className="card">
     <div className="inner">
       <h2>Start Game</h2>
       <p className="kicker">Open the table when everyone is ready.</p>

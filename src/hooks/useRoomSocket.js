@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import syncRoom from "../utils/roomSync";
 
 const useRoomSocket = ({
@@ -17,8 +17,6 @@ const useRoomSocket = ({
   setMaxPlayerBet,
   setMaxPot,
 }) => {
-  const socketRef = useRef(null);
-
   useEffect(() => {
     if (!roomId) {
       return;
@@ -28,8 +26,6 @@ const useRoomSocket = ({
       return;
     }
     const socket = new WebSocket(`${base}/?roomId=${roomId}`);
-    socketRef.current = socket;
-
     socket.onmessage = async () => {
       await syncRoom({
         roomId,
@@ -50,7 +46,6 @@ const useRoomSocket = ({
 
     return () => {
       socket.close();
-      socketRef.current = null;
     };
   }, [
     roomId,

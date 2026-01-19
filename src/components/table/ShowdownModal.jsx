@@ -1,5 +1,5 @@
 const ShowdownModal = ({ loading, onClose, onLoss, onWin, step }) => (
-  <div className="round-modal showdown-modal">
+  <div className="round-modal">
     <div className="round-card showdown-card">
       {step === "prompt" ? (
         <>

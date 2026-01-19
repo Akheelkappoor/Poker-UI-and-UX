@@ -18,19 +18,21 @@ const TableHeader = ({
   const [showWalletAddress, setShowWalletAddress] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
 
-  const handleCopyRoom = async () => {
-    if (!roomId) return;
+  const copyText = async (value) => {
+    if (!value) return;
     try {
-      await navigator.clipboard.writeText(roomId);
+      await navigator.clipboard.writeText(value);
     } catch {
       const area = document.createElement("textarea");
-      area.value = roomId;
+      area.value = value;
       document.body.appendChild(area);
       area.select();
       document.execCommand("copy");
       area.remove();
     }
   };
+
+  const handleCopyRoom = () => copyText(roomId);
 
   const formatAddress = (value) => {
     if (!value) return "—";
@@ -126,9 +128,7 @@ const TableHeader = ({
                   <button
                     className="copyBtn compact"
                     type="button"
-                    onClick={() =>
-                      navigator.clipboard.writeText(currentAccount.poolAddress)
-                    }
+                    onClick={() => copyText(currentAccount.poolAddress)}
                   >
                     Copy
                   </button>
@@ -177,7 +177,7 @@ const TableHeader = ({
           {isGameStarted ? "Live Hand" : "Waiting"}
         </div>
         <div className="statusMeta">
-          <span className="metaText">{playersCount} players</span>
+          <span>{playersCount} players</span>
           <span className="metaSep">•</span>
           <button className="roomChip" type="button" onClick={handleCopyRoom}>
             Room <span className="mono">{roomId}</span>

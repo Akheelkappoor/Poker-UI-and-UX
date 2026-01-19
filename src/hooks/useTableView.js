@@ -13,7 +13,6 @@ const useTableView = ({
   displayName,
   gameStatus,
   maxPlayerBet,
-  pot,
   walletAddress,
 }) => {
   const currentAccount = useMemo(() => {
@@ -31,9 +30,6 @@ const useTableView = ({
     normalizedStatus === "STARTED" ||
     normalizedStatus === "PLAYING" ||
     normalizedStatus === "LIVE";
-  const hasUserBet = currentAccount?.id
-    ? Boolean(betTracker[currentAccount.id])
-    : false;
   const hasAllPlayersBet =
     accounts.length > 0 &&
     accounts.every((account) => {
@@ -65,8 +61,6 @@ const useTableView = ({
     currentAccount,
     currentBet,
     hasActiveBet,
-    hasAllPlayersBet,
-    hasUserBet,
     isGameStarted,
     lowBalancePlayers,
   };

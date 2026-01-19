@@ -34,10 +34,6 @@ const useGameHandlers = ({ state, ui, wagerActions, tableActions }) => {
       return;
     }
     const amount = state.minPlayerBet;
-    if (amount < state.minPlayerBet) {
-      state.updateFeed("Table", "Bet must be at least the minimum bet.");
-      return;
-    }
     wagerActions.applyRaiseApi({
       label: "Bet",
       amount,
@@ -55,6 +51,30 @@ const useGameHandlers = ({ state, ui, wagerActions, tableActions }) => {
   };
   const handleFold = () => {
     tableActions.handleFold();
+  };
+  const handleAllIn = () => {
+    const amount = Math.max(0, state.stack);
+    if (amount <= 0) {
+      state.updateFeed("Table", "No chips available to go all-in.");
+      return;
+    }
+    if (currentBet > 0) {
+      const action = amount <= callAmount ? "CALL" : "RAISE";
+      const label = amount <= callAmount ? "Called" : "Raised";
+      wagerActions.applyRaiseApi({
+        label,
+        amount,
+        stack: state.stack,
+        action,
+      });
+      return;
+    }
+    wagerActions.applyRaiseApi({
+      label: "Bet",
+      amount,
+      stack: state.stack,
+      action: "BET",
+    });
   };
 
   const handleModalCall = () => {
@@ -89,18 +109,32 @@ const useGameHandlers = ({ state, ui, wagerActions, tableActions }) => {
   };
 
   const handleModalFold = () => {
+    tableActions.handleFold();
     ui.setActionModal({ open: false, callAmount: 0 });
-    state.updateFeed(state.displayName, "Folded this hand");
+  };
+
+  const maxRaiseExtra = Math.max(0, state.stack - ui.actionModal.callAmount);
+
+  const handleMinRaise = () => {
+    ui.setRaiseInput(Math.max(state.minPlayerBet, 0));
+  };
+
+  const handleMaxRaise = () => {
+    ui.setRaiseInput(maxRaiseExtra);
   };
 
   return {
     handleBet,
     handleCall,
     handleFold,
+    handleAllIn,
     handleModalCall,
     handleModalFold,
     handleModalRaise,
+    handleMaxRaise,
+    handleMinRaise,
     handleRaise,
+    maxRaiseExtra,
   };
 };
 

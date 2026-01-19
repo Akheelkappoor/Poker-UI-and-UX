@@ -1,12 +1,13 @@
 const ActionPanel = ({
-  error,
   foldLoading,
   hasActiveBet,
   handleBet,
   handleCall,
   handleFold,
+  handleAllIn,
   handleRaise,
   isGameStarted,
+  stack,
 }) => {
   const showCall = hasActiveBet;
   const showBet = !hasActiveBet;
@@ -52,8 +53,14 @@ const ActionPanel = ({
               Raise
             </button>
           ) : null}
+          <button
+            className="btn primary"
+            onClick={handleAllIn}
+            disabled={!isGameStarted || stack <= 0}
+          >
+            All in
+          </button>
         </div>
-        {error ? <div className="error">{error}</div> : null}
       </div>
     </article>
   );

@@ -63,7 +63,6 @@ const useGameController = () => {
     setFoldLoading: ui.setFoldLoading,
     setNextLoading: ui.setNextLoading,
     setCurrentAccountId: state.setCurrentAccountId,
-    setPlayerNameLocked: state.setPlayerNameLocked,
     setSetupComplete: state.setSetupComplete,
     setJoined: state.setJoined,
     setStartGameLoading: ui.setStartGameLoading,

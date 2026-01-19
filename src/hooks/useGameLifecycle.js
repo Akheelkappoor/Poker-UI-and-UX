@@ -61,30 +61,24 @@ const useGameLifecycle = ({ state, ui }) => {
   useRoundAnnouncement(state.phase, ui.setRoundModal);
 
   useEffect(() => {
-    if (state.walletPending && !state.walletReady) {
-      state.setWalletReady(true);
-      state.setWalletPending(false);
-    }
     if (state.setupComplete && state.walletReady && !state.joined) {
       state.setJoined(true);
       state.setCallAmount(10);
-      state.setBetAmount(Math.min(20, state.buyIn));
       state.updateFeed(state.displayName, "Joined the table");
     }
   }, [
     state.setupComplete,
     state.walletReady,
     state.joined,
-    state.walletPending,
-    state.buyIn,
     state.displayName,
     state.setJoined,
     state.setCallAmount,
-    state.setBetAmount,
     state.updateFeed,
-    state.setWalletPending,
-    state.setWalletReady,
   ]);
+
+  useEffect(() => {
+    state.setBetTracker({});
+  }, [state.phase, state.setBetTracker]);
 };
 
 export default useGameLifecycle;

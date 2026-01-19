@@ -25,11 +25,12 @@ const syncRoom = async ({
   if (!response.ok) {
     return;
   }
+  const normalizedPhase = data?.round ? normalizeRound(data.round) : null;
   if (data?.status) {
     setGameStatus(data.status);
   }
-  if (data?.round && setPhase) {
-    setPhase(normalizeRound(data.round));
+  if (normalizedPhase && setPhase) {
+    setPhase(normalizedPhase);
   }
   const normalized = normalizeAccounts(data);
   if (normalized.length === 0) {
@@ -76,6 +77,7 @@ const syncRoom = async ({
     const remoteFeed = buildFeedFromAccounts(normalized);
     setFeed((prev) => mergeFeed(prev, remoteFeed));
   }
+  return normalizedPhase;
 };
 
 export default syncRoom;

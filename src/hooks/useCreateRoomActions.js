@@ -10,7 +10,6 @@ const useCreateRoomActions = ({
   setMaxPlayerBet,
   setMinPlayerBet,
   setPlayerName,
-  setPlayerNameLocked,
   setCurrentAccountId,
   setSetupComplete,
   setSetupError,
@@ -118,7 +117,6 @@ const useCreateRoomActions = ({
         setMinPlayerBet(setupForm.minAmount);
         setPlayerName(trimmedNames[0] || "");
         setCurrentAccountId(normalized[0]?.id || "");
-        setPlayerNameLocked(true);
         setWalletReady(false);
         setSetupComplete(true);
         setSetupMode("");
@@ -137,7 +135,6 @@ const useCreateRoomActions = ({
       setMaxPlayerBet,
       setMinPlayerBet,
       setPlayerName,
-      setPlayerNameLocked,
       setCurrentAccountId,
       setSetupComplete,
       setSetupError,

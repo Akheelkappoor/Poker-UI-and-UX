@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 
 const useGameUiState = () => {
-  const [setupMode, setSetupMode] = useState("");
+  const [setupMode, setSetupMode] = useState("create");
   const [setupForm, setSetupForm] = useState({
     numberOfPlayers: 4,
     numberOfPlayersInput: "4",

@@ -40,7 +40,6 @@ const TablePage = () => {
     displayName: state.displayName,
     gameStatus: state.gameStatus,
     maxPlayerBet: state.maxPlayerBet,
-    pot: state.pot,
     walletAddress: state.walletAddress,
   });
 
@@ -73,6 +72,9 @@ const TablePage = () => {
           minRaise={state.minPlayerBet}
           raiseInput={ui.raiseInput}
           setRaiseInput={ui.setRaiseInput}
+          maxRaiseExtra={handlers.maxRaiseExtra}
+          onMinRaise={handlers.handleMinRaise}
+          onMaxRaise={handlers.handleMaxRaise}
           onCall={handlers.handleModalCall}
           onFold={handlers.handleModalFold}
           onRaise={handlers.handleModalRaise}
@@ -144,8 +146,10 @@ const TablePage = () => {
             handleBet={handlers.handleBet}
             handleCall={handlers.handleCall}
             handleFold={handlers.handleFold}
+            handleAllIn={handlers.handleAllIn}
             handleRaise={handlers.handleRaise}
             isGameStarted={isGameStarted}
+            stack={state.stack}
           />
           {!isGameStarted ? (
             <StartGamePanel

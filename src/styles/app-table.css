@@ -124,38 +124,6 @@
   border-color: rgba(255, 255, 255, 0.22);
 }
 
-.table-page .detailsToggle {
-  margin-top: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(0, 0, 0, 0.2);
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-}
-
-.table-page .detailsToggle span {
-  font-weight: 700;
-}
-
-.table-page .detailsToggle.active {
-  border-color: rgba(163, 126, 44, 0.45);
-  background: rgba(163, 126, 44, 0.18);
-  color: rgba(255, 236, 190, 0.95);
-}
-
-.table-page .detailsToggle:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.3);
-}
 
 .table-page .brand h1 .gold {
   color: var(--gold);
@@ -424,17 +392,6 @@
   white-space: nowrap;
 }
 
-.table-page .infoToggle {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.24);
-  cursor: pointer;
-}
-
-.table-page .infoToggle.active {
-  border-color: rgba(163, 126, 44, 0.55);
-  color: rgba(255, 236, 190, 0.95);
-}
-
 @media (max-width: 720px) {
   .table-page .topbar {
     padding: 16px 14px 18px;
@@ -566,10 +523,6 @@
   .table-page .actionPanel {
     position: sticky;
     top: 16px;
-  }
-
-  .table-page .infoToggle {
-    display: none;
   }
 
   .table-page .desktopTabs {
@@ -799,13 +752,6 @@
   padding: 0 12px;
 }
 
-.table-page .gaugeContent .small {
-  color: rgba(255, 255, 255, 0.66);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 .table-page .gaugeAmount .amount {
   font-family: "Fraunces", serif;
   font-size: 44px;
@@ -816,13 +762,6 @@
 .table-page .gaugeAmount .coin-icon {
   width: 26px;
   height: 26px;
-}
-
-.table-page .gaugeContent .foot {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .table-page .stackTop {
@@ -861,66 +800,6 @@
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(0, 0, 0, 0.14);
-}
-
-.table-page .actionBar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.table-page input[type="range"] {
-  width: 100%;
-  accent-color: var(--gold);
-}
-
-.table-page .amtBox {
-  width: 74px;
-  height: 38px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.18);
-  color: rgba(255, 255, 255, 0.92);
-  padding: 0 10px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-  font-size: 13px;
-  outline: none;
-}
-
-.table-page .amtBox:focus {
-  box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.35);
-}
-
-.table-page .chipRow {
-  margin-top: 10px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.table-page .chip {
-  border-radius: 999px;
-  border: 1px solid rgba(163, 126, 44, 0.22);
-  background: rgba(0, 0, 0, 0.16);
-  color: rgba(255, 255, 255, 0.86);
-  font-weight: 700;
-  font-size: 12px;
-  padding: 8px 10px;
-  cursor: pointer;
-  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-}
-
-.table-page .chip:hover {
-  transform: translateY(-1px);
-  border-color: rgba(163, 126, 44, 0.4);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.table-page .btnCol {
-  margin-top: 12px;
-  display: grid;
-  gap: 10px;
 }
 
 .table-page .actionPanel .inner {
@@ -994,34 +873,6 @@
   display: grid;
   gap: 10px;
   margin-top: 10px;
-}
-
-.table-page .phaseStrip {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(0, 0, 0, 0.16);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.table-page .phaseDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(110, 231, 183, 0.85);
-  box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.14);
-}
-
-.table-page .phaseText {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .table-page .phaseArrow {

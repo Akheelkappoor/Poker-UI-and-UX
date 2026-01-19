@@ -41,7 +41,7 @@ const useRoundActions = ({
       if (!response.ok || data?.success === false) {
         throw new Error(data?.error || "Ready failed.");
       }
-      await syncRoom({
+      const updatedPhase = await syncRoom({
         roomId: gameIds.roomId,
         getRoomUrl,
         setGameStatus,
@@ -49,7 +49,7 @@ const useRoundActions = ({
         setAccounts,
         setTablePlayers,
       });
-      if (phase === "Showdown") {
+      if ((updatedPhase || phase) === "Showdown") {
         setShowdownModal({ open: true, step: "prompt" });
       }
       updateFeed(displayName, "Ready for next round");

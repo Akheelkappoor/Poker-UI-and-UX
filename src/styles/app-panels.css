@@ -1,9 +1,3 @@
-.main-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 22px;
-}
-
 .panel {
   background: rgba(10, 32, 24, 0.88);
   border: 1px solid rgba(163, 126, 44, 0.2);
@@ -29,41 +23,11 @@
   font-size: 22px;
 }
 
-.table-visual {
-  background: linear-gradient(120deg, rgba(0, 96, 57, 0.9), rgba(0, 38, 26, 0.95));
-  border-radius: 160px;
-  padding: 30px 28px;
-  border: 1px solid rgba(163, 126, 44, 0.35);
-  text-align: center;
-  box-shadow: inset 0 0 40px rgba(7, 5, 4, 0.4);
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.pot-total {
-  font-size: 42px;
-  font-family: "Fraunces", serif;
-  margin: 12px 0 0;
-}
-
 .label {
   font-size: 13px;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: rgba(247, 241, 230, 0.6);
-}
-
-.stack {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-}
-
-.stack strong {
-  font-size: 34px;
-  font-family: "Fraunces", serif;
 }
 
 .amount {
@@ -92,93 +56,4 @@
 .amount-xl .coin-icon {
   width: 28px;
   height: 28px;
-}
-
-.feed {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 14px;
-  color: rgba(247, 241, 230, 0.72);
-}
-
-.feed-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-start;
-}
-
-.feed-name {
-  font-weight: 600;
-  color: var(--cream);
-}
-
-.player-count {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.player-count strong {
-  font-size: 32px;
-  font-family: "Fraunces", serif;
-}
-
-.player-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.player-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 10px;
-  border-radius: 12px;
-  background: rgba(247, 241, 230, 0.08);
-  border: 1px solid rgba(163, 126, 44, 0.2);
-}
-
-.player-name {
-  font-weight: 600;
-  width: 100%;
-}
-
-.player-meta {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-}
-
-.player-meta-left {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
-}
-
-.badge {
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.badge-ok {
-  background: rgba(98, 189, 136, 0.18);
-  border: 1px solid rgba(98, 189, 136, 0.5);
-  color: #c7f2d4;
-}
-
-.badge-warn {
-  background: rgba(163, 126, 44, 0.16);
-  border: 1px solid rgba(163, 126, 44, 0.45);
-  color: #f6e9c7;
 }

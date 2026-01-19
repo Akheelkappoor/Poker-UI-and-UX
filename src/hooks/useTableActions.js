@@ -19,7 +19,6 @@ const useTableActions = ({
   setFoldLoading,
   setJoined,
   setCurrentAccountId,
-  setPlayerNameLocked,
   setSetupComplete,
   setStartGameLoading,
   setStartGameOpen,
@@ -48,7 +47,6 @@ const useTableActions = ({
       localStorage.removeItem(STORAGE_KEY);
       setSetupComplete(false);
       setWalletReady(false);
-      setPlayerNameLocked(false);
       setCurrentAccountId("");
       setJoined(false);
       setAccounts([]);
@@ -68,7 +66,6 @@ const useTableActions = ({
     setLeaveLoading,
     setCurrentAccountId,
     setJoined,
-    setPlayerNameLocked,
     setSetupComplete,
     setWalletReady,
     setAccounts,

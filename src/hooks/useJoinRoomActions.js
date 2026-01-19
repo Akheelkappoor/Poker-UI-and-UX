@@ -15,7 +15,6 @@ const useJoinRoomActions = ({
   setJoinRoomPlayers,
   setJoinSelectedId,
   setPlayerName,
-  setPlayerNameLocked,
   setCurrentAccountId,
   setSetupComplete,
   setSetupMode,
@@ -78,7 +77,8 @@ const useJoinRoomActions = ({
         setJoinError("Select your name.");
         return;
       }
-      if (!selected?.status && !selected?.address && !joinWalletAddress.trim()) {
+      const hasWalletOnFile = Boolean(selected?.userAddress || selected?.address);
+      if (!hasWalletOnFile && !joinWalletAddress.trim()) {
         setJoinError("Wallet address is required.");
         return;
       }
@@ -90,7 +90,7 @@ const useJoinRoomActions = ({
           userId: selected?.id,
         };
         let data = {};
-        if (selected?.status) {
+        if (hasWalletOnFile) {
           const retry = await rejoinRoom(alreadyJoinedUrl, payload);
           data = retry.data;
           if (!retry.response.ok) {
@@ -144,7 +144,6 @@ const useJoinRoomActions = ({
         );
         setPlayerName(selected.name);
         setCurrentAccountId(selected.id);
-        setPlayerNameLocked(true);
         setWalletAddress(selected.userAddress || joinWalletAddress.trim());
         setWalletReady(true);
         setSetupComplete(true);
@@ -158,7 +157,6 @@ const useJoinRoomActions = ({
           setSetupComplete(true);
           setWalletReady(false);
           setCurrentAccountId(selected?.id || "");
-          setPlayerNameLocked(false);
           setWalletAddress(joinWalletAddress.trim());
           setSetupMode("");
           navigate("/room", { replace: true });
@@ -178,7 +176,6 @@ const useJoinRoomActions = ({
       setJoinError,
       setJoinLoading,
       setPlayerName,
-      setPlayerNameLocked,
       setCurrentAccountId,
       setSetupComplete,
       setSetupMode,

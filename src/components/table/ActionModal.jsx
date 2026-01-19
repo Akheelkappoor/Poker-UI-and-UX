@@ -7,6 +7,9 @@ const ActionModal = ({
   minRaise,
   raiseInput,
   setRaiseInput,
+  maxRaiseExtra,
+  onMinRaise,
+  onMaxRaise,
   onCall,
   onFold,
   onRaise,
@@ -41,6 +44,24 @@ const ActionModal = ({
           value={raiseInput}
           onChange={(event) => setRaiseInput(Number(event.target.value) || 0)}
         />
+        <div className="quick-actions">
+          <button
+            className="btn btn-secondary"
+            type="button"
+            onClick={onMinRaise}
+            disabled={!isGameStarted}
+          >
+            Min
+          </button>
+          <button
+            className="btn btn-secondary"
+            type="button"
+            onClick={onMaxRaise}
+            disabled={!isGameStarted || maxRaiseExtra <= 0}
+          >
+            Max
+          </button>
+        </div>
         <p className="label subtle">
           Minimum raise: <Amount value={minRaise} size="sm" /> · Total{" "}
           <Amount value={callAmount + (Number(raiseInput) || 0)} size="sm" />
